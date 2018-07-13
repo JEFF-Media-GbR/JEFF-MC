@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source "$HOME/minecraft.conf"
+
+cd "$MCPATH" || {
+	echo "Fehler: $MCPATH nicht gefunden."
+	exit 1
+}
+
+for servername in *; do
+	if [[ -d "$MCPATH/$servername" ]]
+	then
+		# Wenn status = true, ist der Server online und muss beendet werden
+		if "$HOME/bin/status" $servername > /dev/null
+		then
+			echo "Stoppe $servername ..."
+			"$HOME/bin/stop" $servername
+		fi
+	fi
+done

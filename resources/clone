@@ -1,0 +1,48 @@
+#!/bin/bash
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+if [[ "$#" -lt 2 ]]; then
+	echoerr "too few arguments. Usage: clone <source-servername> <destination-servername>"
+	exit 1
+elif [[ "$#" -gt 2 ]]; then
+	echoerr "too many arguments. Usage: clone <source-servername> <destination-servername>"
+	exit 1
+fi
+
+sourceserver="$1"
+destinationserver="$2"
+
+# Existiert Source Server?
+if [[ ! -d "$MCPATH/$sourceserver/" ]]; then
+	echoerr "source server $sourceserver not found at $MCPATH/$sourceserver"
+	exit 1
+fi
+
+if [[ -d "$MCPATH/$destinationserver/" ]]; then
+	echoerr "destination server $destinationserver already exists at $MCPATH/$destinationserver"
+	exit 1
+fi
+
+# Ist Source Server noch am Laufen?
+"$HOME/bin/status" $sourceserver &> /dev/null
+if [[ "$?" -eq 0 ]]; then
+	"$HOME/bin/stop" $sourceserver
+fi
+
+mkdir "$MCPATH/$destinationserver" || {
+	echoerr "could not create directory $MCPATH/$destinationserver"
+	exit 1
+}
+
+cd "$MCPATH/$destinationserver" || {
+	echoerr "could not enter directory $MCPATH/$destinationserver"
+	exit
+}
+
+cp -nR "$MCPATH/$sourceserver/." "$MCPATH/$destinationserver"
+
+echo "Server $sourceserver cloned to $destinationserver"
+exit 0
+
+

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+
+[[ "$#" -lt 1 ]] && {
+	echo "Fehler: Kein Servername angegeben. Benutzung: start <servername>"
+	exit 1
+}
+cd "$MCPATH" || { echo "$Fehler: $MCPATH nicht gefunden."; exit 1; }
+
+cd "$1" || { echo "Fehler: Server $1 nicht gefunden unter $MCPATH/$1"; exit 1; }
+
+"$HOME/bin/status" $1 &>/dev/null
+
+[[ "$?" -eq 0 ]] && {
+	echoerr "server $1 is already online"
+	exit 1
+}
+
+screen -dmS mc-$1 java -jar $MCPATH/$1/spigot-*.jar
+
+echo "server $1 is starting now"

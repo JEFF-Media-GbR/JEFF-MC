@@ -1,0 +1,151 @@
+#!/bin/bash
+
+# Erstellt einen neuen Server
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+VERSION=""
+PORT=""
+WARNINGS=""
+
+[[ "$#" -lt 1 ]] && {
+	echoerr "no servername given. Usage: create <servername>"
+	exit 1
+}
+
+servername="$1"
+
+[[ -d "$servername" ]] && {
+	echoerr "server $servername already exists"
+	exit 1
+}
+
+
+echo "=== Creating server $servername ==="
+mkdir $servername
+
+read -p "Spigot version [e.g. 1.12.2]: " VERSION
+
+# Testen ob Version bereits kompiliert wurde
+if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
+then
+	echo "Spigot version $VERSION has not been compiled yet, starting BuildTools..."
+	cd "$HOME/BuildTools" || { echoerr "directory $HOME/BuildTools not found"; exit 1; }
+	java -jar "$HOME/BuildTools/BuildTools.jar" --rev $VERSION
+	cd "$MCPATH"
+	if [[ "$?" != 0 ]] || [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
+	then
+		echoerr "Could not compile or locate Spigot version $VERSION"
+		exit 1
+	fi
+fi
+
+cp "$HOME/BuildTools/spigot-$VERSION.jar" "$servername"/
+echo "Spigot version $VERSION has been installed to $MCPATH/$servername/spigot-$VERSION.jar"
+echo
+echo -n "Starting server to generate eula.txt..."
+"$HOME/bin/start" $servername >/dev/null
+
+while [[ ! -f "$MCPATH/$servername/eula.txt" ]]
+do
+	echo -n "."
+	sleep 1
+done
+echo
+
+echo "eula.txt found!"
+"$HOME/bin/stop" $servername 2>/dev/null
+
+#while "$HOME/bin/status" $servername &> /dev/null
+#do
+#	echo -n "."
+#	sleep 1
+#done
+#echo
+
+echo "Patching eula.txt"
+sed -i 's/eula=false/eula=true/g' "$MCPATH/$servername/eula.txt"
+echo "Deleting server.properties"
+rm -f "$MCPATH/$servername/server.properties"
+echo
+echo -n "Starting server to generate server.properties..."
+"$HOME/bin/start" $servername > /dev/null
+
+while [[ ! -f "$MCPATH/$servername/server.properties" ]]
+do
+        echo -n "."
+        sleep 1
+done
+echo
+
+echo "server.properties found!"
+"$HOME/bin/stop" $servername 
+
+#while "$HOME/bin/status" $servername > /dev/null
+#do
+#        echo -n "."
+#        sleep 1
+#done
+#echo
+
+echo
+echo "=== Basic configuration ==="
+
+PORTOK=no
+while [[ "$PORTOK" == "no" ]]; do
+	PORTCONFLICT=no
+	read -p "Server port [25565]: " PORT
+	[[ -z "$PORT" ]] && PORT=25565
+	# Überprüfen, ob zwei Server den gleichen Port nutzen
+	for server in *; do
+		if [[ "$server" != "$servername" ]] && [[ -d "$server" ]]; then
+			if [[ "$(getport $server)" -eq "$PORT" ]]; then
+				PORTCONFLICT=yes
+				echo "warning: server $server is already using port $PORT"
+				echo
+				echo "When you have two servers running on the same port, they cannot run at the same time."
+				read -p "Do you want to [c]ontinue, change the [p]ort or [a]bort? [c/p/a]: " -n 1 -r tmpanswer
+				echo
+					if [[ "$tmpanswer" =~ ^[Aa]$ ]]; then
+						echo "aborting..."
+						yes | "$HOME/bin/rmserver" $servername
+						exit 1
+					elif [[ "$tmpanswer" =~ ^[Pp]$ ]]; then
+						continue;
+					elif [[ "$tmpanswer" =~ ^[Cc]$ ]]; then
+						PORTOK=yes
+					else
+						echoerr "could not understand. Aborting..."
+						exit 1
+					fi
+			else
+				echodeb 4 "Port von $server ($(getport $server)) und $servername ($PORT) kollidieren nicht."
+			fi
+		fi
+	done
+	if [[ "$PORTCONFLICT" == "no" ]]; then
+		PORTOK=yes
+	fi
+done
+sed -i "s/server-port=25565/server-port=$PORT/g" "$MCPATH/$servername/server.properties"
+
+read -p "Gamemode (0=Survival, 1=Creative, 2=Adventure) [0]: " GAMEMODE
+[[ -z "$GAMEMODE" ]] && GAMEMODE=0
+sed -i "s/gamemode=0/gamemode=$GAMEMODE/g" "$MCPATH/$servername/server.properties"
+
+read -p "Difficulty (0=Peaceful, 1=Easy, 2=Normal, 3=Hard) [1]: " DIFFICULTY
+[[ -z "$DIFFICULTY" ]] && DIFFICULTY=1
+sed -i "s/difficulty=1/difficulty=$DIFFICULTY/g" "$MCPATH/$servername/server.properties"
+
+read -p "Max. players [20]: " MAXPLAYERS
+[[ -z "$MAXPLAYERS" ]] && MAXPLAYERS=20
+sed -i "s/max-players=20/max-players=$MAXPLAYERS/g" "$MCPATH/$servername/server.properties"
+
+echo
+echo "=== Server created ==="
+echo "Server $servername created at $MCPATH/$servername/"
+echo
+echo "Hinweise:"
+echo "- Bei Nutzung einer Firewall muss Port $PORT freigegeben werden."
+echo "- Der Server ist noch nicht gestartet. Starte ihn mit start $servername"
+

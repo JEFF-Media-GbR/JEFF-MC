@@ -1,0 +1,91 @@
+#!/bin/bash
+
+# Testet ob die grundlegende Umgebung von JEFF MC Launcher vorhanden ist
+
+
+
+DEBUG=0
+CONFIGFILE="$HOME/jeffmc.conf"
+
+
+
+
+# Farben
+GREEN="$(tput setaf 2)"
+RED="$(tput setaf 1)"
+BOLD="$(tput bold)"
+RESET="$(tput sgr0)"
+
+# Echo auf stderr
+function echoerr() { echo "error: $@" 1>&2; }
+function echodeb() {
+	if [[ "$DEBUG" -gt "$1" ]]; then
+		CURRENTDEBUGLEVEL="$1"
+		shift
+		echo "[DEBUG ${CURRENTDEBUGLEVEL}] $@"
+	fi
+}
+
+echodeb 0 "_check was started by $0"
+
+########################
+# Beginn der Tests
+########################
+
+# Configfile gefunden?
+
+echodeb 1 "checking if config file exists at $CONFIGFILE"
+if [[ ! -f "$CONFIGFILE" ]]; then
+	echoerr "config file not found at $CONFIGFILE"
+	exit 1
+fi 
+echodeb 3 "OK: $CONFIGFILE exists"
+
+
+echodeb 1 "parsing config file"
+### Configfile parsen
+source "$CONFIGFILE" || { echoerr "could not source $CONFIGFILE"; exit 1; }
+echodeb 3 "OK: $CONFIGFILE parsed"
+
+echodeb 2 "checking whether MCPATH is defined in config"
+##### MCPATH definiert?
+if [[ -z "$MCPATH" ]]; then
+	echoerr "\$MCPATH not defined in $CONFIGFILE"
+	exit 1
+fi
+echodeb 3 "OK: MCPATH is defined as $MCPATH"
+
+echodeb 2 "checking whether MCPATH is a directory"
+##### MCPATH ein Verzeichnis?
+if [[ ! -d "$MCPATH" ]]; then
+	echoerr "directory $MCPATH not found"
+	exit 1
+fi
+echodeb 3 "OK: MCPATH is a directory"
+
+echodeb 2 "checking whether $HOME/bin is a directory"
+##### HOME/bin vorhanden?
+if [[ ! -d "$HOME/bin" ]]; then
+	echoerr "directory $HOME/bin not found"
+	exit 1
+fi
+echodeb 3 "$HOME/bin is a directory"
+
+echodeb 2 "checking if defined MCUSER $MCUSER equals current user $USER"
+##### Richtiger User?
+if [[ "$USER" != "$MCUSER" ]]; then
+	echoerr "only $MCUSER can run this script"
+        exit 1
+fi
+echodeb 3 "OK: current user is MCUSER $MCUSER"
+
+
+echodeb 1 "entering MCPATH $MCPATH"
+## Wir betreten den $MCPATH
+cd "$MCPATH" || {
+	echoerr "could not enter directory $MCPATH"
+	exit 1
+}
+echodeb 3 "succesfully entered MCPATH $MCPATH"
+
+source "$HOME/bin/_functions"

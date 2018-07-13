@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Startet Server neu
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+if [[ "$#" -lt 1 ]]; then
+	echoerr "too few arguments. usage: restart <servername>"
+	exit 1
+fi
+
+
+"$HOME/bin/status" $1 &>/dev/null
+if [[ "$?" -eq 2 ]]; then
+	echoerr "server $1 is not online"
+	exit 1
+fi
+
+if [[ ! -d "$MCPATH/$1" ]]; then
+	echoerr "server $1 not found"
+	exit 1
+fi
+
+"$HOME/bin/stop" $1
+if [[ "$?" -ne 0 ]]; then
+	echoerr "could not stop server $1"
+	exit 1
+fi
+
+"$HOME/bin/start" $1
+if [[ "$?" -ne 0 ]]; then
+	echoerr "could not start server $1"
+	exit 1
+fi

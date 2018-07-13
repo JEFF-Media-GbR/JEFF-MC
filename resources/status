@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# JEFF-MC Spigot Launcher
+
+# Benutzung: status <servername>
+# Wird -a oder --all als Servername angegeben, wird der Status für alle Server zurückgegeben
+
+# Liefert 1 zurück, wenn Servername fehlt
+# Liefert 2 zurück, wenn Screen-Session nicht gefunden wurde
+# Liefert 0 zurück, wenn Screen-Session gefunden wurde
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+
+padding=3
+servername="$1"
+
+#function getport() {
+#	if [[ -f "$MCPATH/$servername/server.properties" ]]; then
+#        	echo "$(grep '^server-port=' "$MCPATH/$1/server.properties" | cut -f 2 -d '=')"
+#        fi
+#}
+
+function getonline() {
+	"$HOME/bin/status" $1 &> /dev/null
+	if [[ "$?" -eq 0 ]]; then
+		echo "${GREEN}online${RESET}"
+	else
+		echo "${RED}offline${RESET}"
+	fi
+}
+
+function getplayers() {
+	maxplayers="$(grep '^max-players=' "$MCPATH/$1/server.properties" | cut -f 2 -d '=')"
+	echo "?/$maxplayers"
+}
+
+[[ "$#" -lt 1 ]] && {
+	servername="--all"
+}
+
+if [[ "$servername" == "-a" ]] || [[ "$servername" == "--all" ]]
+then
+	cd "$MCPATH" || { echoerr "could not enter directory $MCPATH"; exit 1; }
+
+	echo "${BOLD}JEFF-MC Spigot Launcher${RESET}"
+	echo
+	{
+	echo "${BOLD}Server${RESET} ${BOLD}Status${RESET} ${BOLD}Port${RESET} ${BOLD}Players${RESET}"
+	for servername in *; do
+		if [[ -d "$servername" ]]
+		then
+			serverstatus="$(getonline $servername)"
+			port="$(getport $servername)"
+			players="$(getplayers $servername)"
+			echo "$servername $serverstatus $port $players"
+		fi
+	done
+	} | "$HOME/bin/column2" -s " " -p $padding
+	exit 0
+fi
+
+[[ $(screen -ls | grep ".mc-$servername"$'\t' | wc -l) != 1 ]] && {
+        echo "server $servername not online (no session found in 'screen -ls')"
+        exit 2
+}
+
+echo "server $servername is online at port $(getport $servername)"
+exit 0

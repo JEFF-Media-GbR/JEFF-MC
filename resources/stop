@@ -1,0 +1,30 @@
+#!/bin/bash
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+[[ "$#" -lt 1 ]] && {
+	echoerr "too few arguments. Usage: stop <servername>"
+	exit 1
+}
+
+cd $MCPATH
+cd "$1" || { echoerr "server $1 not found in $MCPATH/$1"; exit 1; }
+
+"$HOME/bin/status" $1 &>/dev/null
+if [[ "$?" -ne 0 ]]; then
+	echoerr "server $1 not online (no session found in 'screen -ls')"
+	exit 1
+fi
+
+screen -S mc-$1 -X stuff 'stop\n'
+
+echo -n "waiting for server $1 to stop..."
+
+while "$HOME/bin/status" $1 &> /dev/null
+do
+	echo -n "."
+	sleep 1
+done
+echo
+
+echo "server $1 stopped"

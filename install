@@ -1,0 +1,71 @@
+#!/bin/bash
+
+set -e
+
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+
+BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+
+# cd to path of this script
+# https://stackoverflow.com/questions/6393551/what-is-the-meaning-of-0-in-a-bash-script
+cd "${0%/*}"
+
+echo "${BOLD}=======      JEFF-MC Spigot Launcher      =======${RESET}"
+echo
+echo "This script will install JEFF-MC to the homedir of"
+echo "the current user ($USER)."
+echo
+echo "If you want to run the server executables as another"
+echo "user, you have to cancel the installation and run the"
+echo "installer as the desired user."
+echo "You should use a fresh account for installation, as the"
+echo "installer might overwrite already existing files."
+echo
+echo "${BOLD}Installation Path:${RESET} $HOME"
+echo
+echo "Your Minecraft files can be stored in a different"
+echo "directory. You can specify the desired path at a later"
+echo "time in the file $HOME/jeffmc.conf"
+echo
+read -p "Continue installation to $HOME? [y/n]: " answer
+
+echo
+if [[ ! "$answer" =~ ^[yY][eE][sS]$|^[yY]$ ]]; then
+	echo "Installation cancelled!"
+fi
+echo
+echo "Copying scripts to $HOME/bin"
+cd resources
+mkdir -p "$HOME/bin"
+cp attach autostart _check clone column2 create _functions restart rmserver send start status stop stopall "$HOME/bin/"
+
+echo "Copying config files to $HOME"
+cp autostart.list jeffmc.conf "$HOME/"
+
+echo "Applying config"
+echo "|- Patching username"
+sed -i 's/__username__/'"$USER"'/g' "$HOME/jeffmc.conf"
+echo "|- Patching homedir"
+HOMEESCAPED="$(echo $HOME | sed 's/\//\\\//g')" # lol
+sed -i 's/__homedir__/'"$HOMEESCAPED"'/g' "$HOME/jeffmc.conf"
+echo "Creating default directory for server files under $HOME/servers"
+mkdir -p "$HOME/servers"
+
+echo "Installing BuildTools too $HOME/BuildTools"
+mkdir -p "$HOME/BuildTools"
+echo "Downloading BuildTools from $BUILDTOOLSLINK"
+wget -O "$HOME/BuildTools/BuildTools.jar" "$BUILDTOOLSLINK"
+
+echo
+echo "${BOLD}=== Success ===${RESET}"
+echo
+echo "JEFF-MC Spigot Launcher has been succesfully installed"
+echo "to $HOME"
+echo
+echo "You can create your first server like this:"
+echo "  create <servername>"
+echo
+echo "If your shell cannot find the create command, you have"
+echo "to specify the full path using ~/bin/create or include"
+echo "~/bin into your \$PATH"

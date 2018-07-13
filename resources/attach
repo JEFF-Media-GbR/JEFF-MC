@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+servername="$1"
+
+if [[ ! -z "$servername" ]]; then
+	screen -r -S "mc-$servername"
+else
+	

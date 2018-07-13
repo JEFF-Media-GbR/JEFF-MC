@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Sendet einen Befehl an eine Serverkonsole
+# Benutzung: send <servername> <befehl>
+
+[[ "$#" -lt 2 ]] && {
+	echo "Fehler: Zu wenig Parameter. Benutzung: send <servername> <befehl>"
+	exit 1
+} 
+
+if "$HOME/bin/status" $1 > /dev/null
+then
+	servername="$1"
+	shift
+	screen -S mc-$servername -X stuff '$@\n'
+else
+	echo "Fehler: Server $1 nicht online."
+fi
