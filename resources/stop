@@ -2,6 +2,8 @@
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
+TIMEOUT=120
+
 [[ "$#" -lt 1 ]] && {
 	echoerr "too few arguments. Usage: stop <servername>"
 	exit 1
@@ -20,10 +22,17 @@ screen -S "mc-$1" -X stuff 'stop\n'
 
 echo -n "waiting for server $1 to stop..."
 
+try=0
+
 while "$HOME/bin/status" $1 &> /dev/null
 do
 	echo -n "."
 	sleep 1
+	try=$((try+1))
+	if [[ $try -gt $TIMEOUT ]]; then
+		echoerr "could not stop server $1"
+		exit 1
+	fi
 done
 echo
 
