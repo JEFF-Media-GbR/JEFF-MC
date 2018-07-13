@@ -16,7 +16,7 @@ if [[ "$?" -ne 0 ]]; then
 	exit 1
 fi
 
-screen -S mc-$1 -X stuff 'stop\n'
+screen -S "mc-$1" -X stuff 'stop\n'
 
 echo -n "waiting for server $1 to stop..."
 
