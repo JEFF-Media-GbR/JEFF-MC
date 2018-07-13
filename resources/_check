@@ -1,16 +1,13 @@
 #!/bin/bash
 
-# Testet ob die grundlegende Umgebung von JEFF MC Launcher vorhanden ist
+# checks if all resources needed by JEFF-MC are present
 
-
-
-DEBUG=0
+# this should not be changed. do configuration in ~/jeffmc.conf
 CONFIGFILE="$HOME/jeffmc.conf"
+DEBUG=0
 
 
 
-
-# Farben
 GREEN="$(tput setaf 2)"
 RED="$(tput setaf 1)"
 BOLD="$(tput bold)"
@@ -29,10 +26,10 @@ function echodeb() {
 echodeb 0 "_check was started by $0"
 
 ########################
-# Beginn der Tests
+# Begin tests
 ########################
 
-# Configfile gefunden?
+# Configfile found?
 
 echodeb 1 "checking if config file exists at $CONFIGFILE"
 if [[ ! -f "$CONFIGFILE" ]]; then
@@ -43,12 +40,12 @@ echodeb 3 "OK: $CONFIGFILE exists"
 
 
 echodeb 1 "parsing config file"
-### Configfile parsen
+### parse config
 source "$CONFIGFILE" || { echoerr "could not source $CONFIGFILE"; exit 1; }
 echodeb 3 "OK: $CONFIGFILE parsed"
 
 echodeb 2 "checking whether MCPATH is defined in config"
-##### MCPATH definiert?
+##### MCPATH defined?
 if [[ -z "$MCPATH" ]]; then
 	echoerr "\$MCPATH not defined in $CONFIGFILE"
 	exit 1
@@ -56,7 +53,7 @@ fi
 echodeb 3 "OK: MCPATH is defined as $MCPATH"
 
 echodeb 2 "checking whether MCPATH is a directory"
-##### MCPATH ein Verzeichnis?
+##### MCPATH is a directory?
 if [[ ! -d "$MCPATH" ]]; then
 	echoerr "directory $MCPATH not found"
 	exit 1
@@ -64,7 +61,7 @@ fi
 echodeb 3 "OK: MCPATH is a directory"
 
 echodeb 2 "checking whether $HOME/bin is a directory"
-##### HOME/bin vorhanden?
+##### HOME/bin present?
 if [[ ! -d "$HOME/bin" ]]; then
 	echoerr "directory $HOME/bin not found"
 	exit 1
@@ -72,7 +69,7 @@ fi
 echodeb 3 "$HOME/bin is a directory"
 
 echodeb 2 "checking if defined MCUSER $MCUSER equals current user $USER"
-##### Richtiger User?
+##### correct user?
 if [[ "$USER" != "$MCUSER" ]]; then
 	echoerr "only $MCUSER can run this script"
         exit 1
@@ -81,7 +78,7 @@ echodeb 3 "OK: current user is MCUSER $MCUSER"
 
 
 echodeb 1 "entering MCPATH $MCPATH"
-## Wir betreten den $MCPATH
+## enter MCPATH
 cd "$MCPATH" || {
 	echoerr "could not enter directory $MCPATH"
 	exit 1
