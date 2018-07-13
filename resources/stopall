@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$HOME/minecraft.conf"
+source "$HOME/bin/_check"
 
 cd "$MCPATH" || {
 	echo "Fehler: $MCPATH nicht gefunden."
