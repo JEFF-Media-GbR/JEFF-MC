@@ -1,5 +1,10 @@
 #!/bin/bash
 
+[[ "$#" -ne 1 ]] && {
+        echoerr "too few arguments. Usage: getport <servername>"
+        exit 1
+}
+
 function getport() {
         if [[ -f "$MCPATH/$servername/server.properties" ]]; then
                 echo "$(grep '^server-port=' "$MCPATH/$1/server.properties" | cut -f 2 -d '=')"
