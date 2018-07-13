@@ -2,14 +2,14 @@
 
 set -e
 
-BOLD=$(tput bold)
-RESET=$(tput sgr0)
-
 BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
 
 # cd to path of this script
 # https://stackoverflow.com/questions/6393551/what-is-the-meaning-of-0-in-a-bash-script
 cd "${0%/*}"
+
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
 
 echo "${BOLD}=======      JEFF-MC Spigot Launcher      =======${RESET}"
 echo
