@@ -11,6 +11,8 @@ cd "${0%/*}"
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
 
+command -v foo >/dev/null 2>&1 || { echo >&2 "JEFF-MC requires java to run the server executables. Aborting..."; exit 1; }
+
 echo "${BOLD}=======      JEFF-MC Spigot Launcher      =======${RESET}"
 echo
 echo "This script will install JEFF-MC to the homedir of"
