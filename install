@@ -11,7 +11,7 @@ cd "${0%/*}"
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
 
-command -v java >/dev/null 2>&1 || { echo -e >&2 "JEFF-MC requires java to run the server executables. If you are using\nDebian/Ubuntu, you can try 'apt-get install default-jre'"; exit 1; }
+command -v java >/dev/null 2>&1 || { echo -e >&2 "JEFF-MC requires java to run the server executables."; exit 1; }
 
 echo "${BOLD}=======      JEFF-MC Spigot Launcher      =======${RESET}"
 echo
