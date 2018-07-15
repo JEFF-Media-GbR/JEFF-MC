@@ -33,6 +33,7 @@ read -p "Continue installation to $HOME? [y/n]: " answer
 echo
 if [[ ! "$answer" =~ ^[yY][eE][sS]$|^[yY]$ ]]; then
 	echo "Installation cancelled!"
+	exit 1
 fi
 echo
 echo "Copying scripts to $HOME/bin"
