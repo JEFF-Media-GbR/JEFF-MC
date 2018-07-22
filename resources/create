@@ -4,6 +4,8 @@
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
+BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+
 VERSION=""
 PORT=""
 WARNINGS=""
@@ -31,6 +33,7 @@ if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
 then
 	echo "Spigot version $VERSION has not been compiled yet, starting BuildTools..."
 	cd "$HOME/BuildTools" || { echoerr "directory $HOME/BuildTools not found"; exit 1; }
+	wget -O BuildTools.jar "$BUILDTOOLSLINK"
 	java -jar "$HOME/BuildTools/BuildTools.jar" --rev $VERSION
 	cd "$MCPATH"
 	if [[ "$?" != 0 ]] || [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
