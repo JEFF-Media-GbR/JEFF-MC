@@ -3,8 +3,10 @@
 # Sendet einen Befehl an eine Serverkonsole
 # Benutzung: send <servername> <befehl>
 
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
 [[ "$#" -lt 2 ]] && {
-	echo "Fehler: Zu wenig Parameter. Benutzung: send <servername> <befehl>"
+	echoerr "too few parameters. Usage: send <servername> <command...>"
 	exit 1
 } 
 
@@ -12,7 +14,9 @@ if "$HOME/bin/status" $1 > /dev/null
 then
 	servername="$1"
 	shift
-	screen -S mc-$servername -X stuff '$@\n'
+	command="$*"
+	screen -S mc-$servername -X stuff "${command}
+" # newline, dont delete
 else
-	echo "Fehler: Server $1 nicht online."
+	echoerr "server $1 is not online."
 fi
