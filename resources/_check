@@ -2,19 +2,20 @@
 
 # checks if all resources needed by JEFF-MC are present
 
-# this should not be changed. do configuration in ~/jeffmc.conf
-CONFIGFILE="$HOME/jeffmc.conf"
+# GLOBAL DEBUG
+# you can enable global debug messages. raise the number for more verbose output
 DEBUG=0
 
-
+# this should not be changed. do configuration in ~/jeffmc.conf
+CONFIGFILE="$HOME/jeffmc.conf"
 
 GREEN="$(tput setaf 2)"
 RED="$(tput setaf 1)"
 BOLD="$(tput bold)"
 RESET="$(tput sgr0)"
 
-# Echo auf stderr
 function echoerr() { echo "error: $@" 1>&2; }
+
 function echodeb() {
 	if [[ "$DEBUG" -gt "$1" ]]; then
 		CURRENTDEBUGLEVEL="$1"
