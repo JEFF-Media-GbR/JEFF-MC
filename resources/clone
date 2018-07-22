@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# clones a complete server installation.
+# WARNING: if your server uses MySQL or similar, you must change your database credentials
+# if you don't want both servers to use the same database. Cloning does NOT copy
+# external databases! 
+
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 if [[ "$#" -lt 2 ]]; then
@@ -12,6 +17,8 @@ fi
 
 sourceserver="$1"
 destinationserver="$2"
+# arguments for cp
+cpshortargs="nvR"
 
 # Existiert Source Server?
 if [[ ! -d "$MCPATH/$sourceserver/" ]]; then
@@ -40,7 +47,7 @@ cd "$MCPATH/$destinationserver" || {
 	exit
 }
 
-cp -nR "$MCPATH/$sourceserver/." "$MCPATH/$destinationserver"
+cp -${cpshortargs} "$MCPATH/$sourceserver/." "$MCPATH/$destinationserver"
 
 echo "Server $sourceserver cloned to $destinationserver"
 exit 0
