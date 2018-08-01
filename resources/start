@@ -1,15 +1,29 @@
 #!/bin/bash
 
+attach=no
+
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 
+while getopts ":a" opt; do
+  case ${opt} in
+    a ) 
+         attach=yes
+      ;;
+    \? ) echo "Usage: start [-a] <servername>"
+      ;;
+  esac
+done
+
+
+
 [[ "$#" -lt 1 ]] && {
-	echo "Fehler: Kein Servername angegeben. Benutzung: start <servername>"
+	echoerr "no servername given. Usage: start [-a] <servername>"
 	exit 1
 }
-cd "$MCPATH" || { echo "$Fehler: $MCPATH nicht gefunden."; exit 1; }
+cd "$MCPATH" || { echoerr "$MCPATH not found."; exit 1; }
 
-cd "$1" || { echo "Fehler: Server $1 nicht gefunden unter $MCPATH/$1"; exit 1; }
+cd "$1" || { echoerr "server $1 not found at $MCPATH/$1"; exit 1; }
 
 "$HOME/bin/status" $1 &>/dev/null
 
@@ -21,3 +35,7 @@ cd "$1" || { echo "Fehler: Server $1 nicht gefunden unter $MCPATH/$1"; exit 1; }
 screen -dmS mc-$1 java -jar $MCPATH/$1/spigot-*.jar
 
 echo "server $1 is starting now"
+
+if [ "$attach" == "yes" ]; then
+	"$HOME/bin/start" $1
+fi
