@@ -1,6 +1,9 @@
 #!/bin/bash
 
 attach=no
+ram=2048M
+
+javaargs="-Xmx $ram"
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
@@ -27,7 +30,7 @@ cd "$1" || { echoerr "server $1 not found at $MCPATH/$1"; exit 1; }
 	exit 1
 }
 
-screen -dmS mc-$1 java -jar $MCPATH/$1/spigot-*.jar
+screen -dmS mc-$1 java -jar $javaargs $MCPATH/$1/spigot-*.jar
 
 echo "server $1 is starting now"
 
