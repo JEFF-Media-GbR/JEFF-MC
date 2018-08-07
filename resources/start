@@ -30,7 +30,22 @@ cd "$1" || { echoerr "server $1 not found at $MCPATH/$1"; exit 1; }
 	exit 1
 }
 
-screen -dmS mc-$1 java $javaargs -jar $MCPATH/$1/spigot-*.jar
+cd "$MCPATH/$1" || {
+	echoerr "could not enter directory $MCPATH/$1"
+	exit 1
+}
+
+# this can be overriden in each server's jeffmc-server.conf file
+executable=$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)
+
+if [[ -f "jeffmc-server.conf" ]]; then
+	source jeffmc-server.conf || {
+		echoerr "could not parse $MCPATH/$1/jeffmc-server.conf"
+		exit 1
+	}
+fi
+
+screen -dmS mc-$1 java $javaargs -jar "$executable"
 
 echo "server $1 is starting now"
 
