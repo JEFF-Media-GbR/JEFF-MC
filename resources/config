@@ -21,7 +21,7 @@ xitem=30
 y=1 # incremental
 tmprunfile=/tmp/jeffmc.config.run
 tmpanswerfile=/tmp/jeffmc.config.answers
-tmpkeysfile/tmp/jeffmc.config.keys
+tmpkeysfile=/tmp/jeffmc.config.keys
 
 flen=$((cols-30))
 ilen=200
