@@ -43,7 +43,11 @@ if [[ ! -f server.properties ]]; then
 fi
 
 array=""
-keys=""
+touch $tmpkeysfile || {
+    echoerr "could not create file $tmpkeysfile"
+    exit 1
+}
+echo "" > $tmpkeysfile
 
 while read line; do
     if [[ ${line:0:1} != '#' ]]; then
@@ -51,7 +55,7 @@ while read line; do
         value=$(echo $line | cut -f 2 -d '=')
         #array="\"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
         array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
-        keys="$keys $key"
+        echo $key >> $tmpkeysfile
         y=$((y+1))
     fi
 done < server.properties
@@ -69,7 +73,6 @@ touch $tmpanswerfile || {
 echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
-echo -n $keys >> $tmpkeysfile
 
 
 bash $tmprunfile
