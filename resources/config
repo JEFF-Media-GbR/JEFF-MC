@@ -51,7 +51,7 @@ while read line; do
         value=$(echo $line | cut -f 2 -d '=')
         #array="\"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
         array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
-        $keys="$keys $key"
+        keys="$keys $key"
         y=$((y+1))
     fi
 done < server.properties
