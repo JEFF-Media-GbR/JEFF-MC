@@ -41,7 +41,8 @@ echo
 echo "Copying scripts to $HOME/bin"
 cd resources
 mkdir -p "$HOME/bin"
-cp attach autostart _check clone column2 create _functions restart rmserver send start status stop stopall "$HOME/bin/"
+cp attach autostart _check clone column2 create _functions restart update rmserver send start status stop stopall "$HOME/bin/"
+chmod o+x "$HOME"/bin/*
 
 echo "Copying config files to $HOME"
 cp autostart.list jeffmc.conf "$HOME/"
