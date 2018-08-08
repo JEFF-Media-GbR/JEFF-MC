@@ -1,9 +1,16 @@
 # you can copy this file to a server directory and rename it to jeffmc-server.conf
 # to allow server specific startup settings.
-
 # you can use bash features such as $(...)
 
-executable="myserver.jar"
+# Name of your server executable (e.g. spigot-latest.jar)
+# The default setting will use the first .jar file found
 # e.g.: executable="spigot-latest.jar"
-#       executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)"
-#       executable="*.jar"
+#       executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)" # default
+#       executable="*.jar" # do not use this if you have more than one jar in your server directory!
+executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)"
+
+# Maximum RAM usage
+Xmx=2048M
+
+# Initial RAM usage
+Xms=256M
