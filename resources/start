@@ -9,7 +9,7 @@ source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readab
 # or global settings at ~/jeffmc.conf
 Xms=256M
 Xmx=1024M
-executable=$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)
+executable=$(find "$MCPATH/$1/" -maxdepth 1 -name \*.jar | sort | tail -n1)
 
 
 if [ "$1" == "-a" ]; then
