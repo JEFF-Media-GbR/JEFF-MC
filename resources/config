@@ -16,6 +16,9 @@ xlabel=3
 xitem=18
 y=1 # incremental
 
+flen=30
+ilen=200
+
 cd "$MCPATH" || {
     echoerr "could not enter $MCPATH"
     exit 1
@@ -32,13 +35,13 @@ if [[ ! -f server.properties ]]; then
     exit 2
 fi
 
+array=""
+
 while read line; do
     key=$(echo $line | cut -f 1 -d '=')
     value=$(echo $line | cut -f 2 -d '=')
-    echo $key: $value
+    array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
 done < server.properties
 
 dialog --title "JEFF-MC: Server configuration" \
-        --form "\nCopyright 2018 JEFFmedia GbR" $(($(tput lines)-6)) $(($(tput cols)-6)) $(($(tput lines)-20)) \
-        "Prop1" $y $xlabel "true"   $y $xitem 30 50 \
-        2>/tmp/jeffmc.$$
+        --form "\nCopyright 2018 JEFFmedia GbR" $(($(tput lines)-6)) $(($(tput cols)-6)) $(($(tput lines)-20)) $array 2>/tmp/jeffmc.$$
