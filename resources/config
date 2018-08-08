@@ -11,13 +11,17 @@ if [[ "$#" -lt 1 ]]; then
     exit 1
 fi
 
+
+lines=$(($(tput lines)-6))
+cols=$(($(tput cols)-6))
+menuheight=$(($(tput lines)-20))
 servername="$1"
 xlabel=3
-xitem=18
+xitem=30
 y=1 # incremental
 tmprunfile=/tmp/jeffmc.config.run
 
-flen=30
+flen=$
 ilen=200
 
 cd "$MCPATH" || {
@@ -48,14 +52,17 @@ while read line; do
     fi
 done < server.properties
 
-HISTFILE=~/.bash_history
-set -o history
+touch $tmprunfile || {
+    echoerr "could not create file $tmprunfile"
+    exit 1
+}
 
-echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" \$((\$(tput lines)-6)) \$((\$(tput cols)-6)) \$((\$(tput lines)-20)) " > $tmprunfile 
+echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
 #2>/tmp/jeffmc.$$
-history
 
-cat $tmprunfile
+
+bash $tmprunfile
+rm -f $tmprunfile
 
 
