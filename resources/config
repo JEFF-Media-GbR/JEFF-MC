@@ -15,6 +15,7 @@ servername="$1"
 xlabel=3
 xitem=18
 y=1 # incremental
+tmprunfile=/tmp/jeffmc.config.run
 
 flen=30
 ilen=200
@@ -50,10 +51,11 @@ done < server.properties
 HISTFILE=~/.bash_history
 set -o history
 
-dialog --title "JEFF-MC: Server configuration" --form "\nCopyright 2018 JEFFmedia GbR" $(($(tput lines)-6)) $(($(tput cols)-6)) $(($(tput lines)-20)) $array 
+echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" \$((\$(tput lines)-6)) \$((\$(tput cols)-6)) \$((\$(tput lines)-20)) " > $tmprunfile 
+echo -n $array >> $tmprunfile
 #2>/tmp/jeffmc.$$
 history
 
-echo $array
+cat $tmprunfile
 
 
