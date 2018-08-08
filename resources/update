@@ -12,4 +12,4 @@ cd "$tmpdir"
 git clone "$gitrepo"
 yes | JEFF-MC/install
 rm -rf "$tmpdir"
-cd "$pwd"
+cd "$oldpwd"
