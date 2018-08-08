@@ -47,7 +47,7 @@ touch $tmpkeysfile || {
     echoerr "could not create file $tmpkeysfile"
     exit 1
 }
-echo "" > $tmpkeysfile
+echo -n "" > $tmpkeysfile
 
 while read line; do
     if [[ ${line:0:1} != '#' ]]; then
@@ -78,4 +78,9 @@ echo -n " 2> $tmpanswerfile" >> $tmprunfile
 bash $tmprunfile
 rm -f $tmprunfile
 
-
+currentline=1 #incremental
+while read line; do
+    key=$line
+    value=$(sed "${currentline}q;d" $tmpanswerfile)
+    echo "${key}=${value}"
+done < $tmpkeysfile
