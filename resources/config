@@ -41,6 +41,7 @@ while read line; do
     key=$(echo $line | cut -f 1 -d '=')
     value=$(echo $line | cut -f 2 -d '=')
     array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
+    y=$((y+1))
 done < server.properties
 
 dialog --title "JEFF-MC: Server configuration" \
