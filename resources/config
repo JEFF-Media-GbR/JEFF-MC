@@ -4,6 +4,8 @@
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
+needscommand dialog
+
 if [[ "$#" -lt 1 ]]; then
     echoerr "too few parameters. Usage: $0 <servername>"
     exit 1
