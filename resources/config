@@ -21,7 +21,7 @@ xitem=30
 y=1 # incremental
 tmprunfile=/tmp/jeffmc.config.run
 
-flen=$
+flen=$((cols-30))
 ilen=200
 
 cd "$MCPATH" || {
