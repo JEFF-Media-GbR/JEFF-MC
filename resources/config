@@ -52,6 +52,6 @@ set -o history
 
 dialog --title "JEFF-MC: Server configuration" --form "\nCopyright 2018 JEFFmedia GbR" $(($(tput lines)-6)) $(($(tput cols)-6)) $(($(tput lines)-20)) $array 
 #2>/tmp/jeffmc.$$
-echodeb 3 $array
+echo $array
 
 history
