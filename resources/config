@@ -79,9 +79,15 @@ bash $tmprunfile
 rm -f $tmprunfile
 
 currentline=1 #incremental
+
+mv server.properties server.properties.bak.$$ || { echoerr "could not rename server.properties"; exit 1; }
+
+touch server.properties
+
 while read line; do
     key=$line
     value=$(sed "${currentline}q;d" $tmpanswerfile)
-    echo "${key}=${value}"
+    echo "${key}=${value}" >> server.properties
     currentline=$((currentline+1))
 done < $tmpkeysfile
+
