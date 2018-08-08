@@ -83,4 +83,5 @@ while read line; do
     key=$line
     value=$(sed "${currentline}q;d" $tmpanswerfile)
     echo "${key}=${value}"
+    currentline=$((currentline+1))
 done < $tmpkeysfile
