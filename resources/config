@@ -21,6 +21,7 @@ xitem=30
 y=1 # incremental
 tmprunfile=/tmp/jeffmc.config.run
 tmpanswerfile=/tmp/jeffmc.config.answers
+tmpkeysfile/tmp/jeffmc.config.keys
 
 flen=$((cols-30))
 ilen=200
@@ -42,6 +43,7 @@ if [[ ! -f server.properties ]]; then
 fi
 
 array=""
+keys=""
 
 while read line; do
     if [[ ${line:0:1} != '#' ]]; then
@@ -49,6 +51,7 @@ while read line; do
         value=$(echo $line | cut -f 2 -d '=')
         #array="\"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
         array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
+        $keys="$keys $key"
         y=$((y+1))
     fi
 done < server.properties
@@ -66,6 +69,7 @@ touch $tmpanswerfile || {
 echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
+echo -n $keys >> $tmpkeysfile
 
 
 bash $tmprunfile
