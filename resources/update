@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# this will update JEFF-MC to the newest version
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+set -e
+oldpwd="$(pwd)"
+gitrepo="https://github.com/JEFF-Media-GbR/JEFF-MC"
+tmpdir="$(mktemp -d)"
+cd "$tmpdir"
+git clone "$gitrepo"
+yes | JEFF-MC/install
+rm -rf "$tmpdir"
+cd "$pwd"
