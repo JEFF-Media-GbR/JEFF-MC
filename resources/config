@@ -20,7 +20,7 @@ xlabel=3
 xitem=30
 y=1 # incremental
 tmprunfile=/tmp/jeffmc.config.run
-tmpanswerfile/tmp/jeffmc.config.answers
+tmpanswerfile=/tmp/jeffmc.config.answers
 
 flen=$((cols-30))
 ilen=200
@@ -58,9 +58,14 @@ touch $tmprunfile || {
     exit 1
 }
 
+touch $tmpanswerfile || {
+    echoerr "could not create file $tmpanswerfile"
+    exit 1
+}
+
 echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
-echo -n " 2>/$tmpanswerfile" >> $tmprunfile
+echo -n " 2> $tmpanswerfile" >> $tmprunfile
 
 
 bash $tmprunfile
