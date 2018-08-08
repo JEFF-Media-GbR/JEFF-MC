@@ -38,7 +38,7 @@ fi
 array=""
 
 while read line; do
-    if [[ ${line:0:1} != '#' ]]
+    if [[ ${line:0:1} != '#' ]]; then
         key=$(echo $line | cut -f 1 -d '=')
         value=$(echo $line | cut -f 2 -d '=')
         array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
