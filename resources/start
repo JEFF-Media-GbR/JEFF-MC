@@ -1,9 +1,6 @@
 #!/bin/bash
 
 attach=no
-ram=2048M
-
-javaargs="-Xmx${ram}"
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
@@ -45,7 +42,7 @@ if [[ -f "jeffmc-server.conf" ]]; then
 	}
 fi
 
-screen -dmS mc-$1 java $javaargs -jar "$executable"
+screen -dmS "mc-$1" java -Xmx${Xms} -Xms${Xms} -jar "$executable"
 
 echo "server $1 is starting now"
 
