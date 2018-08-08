@@ -1,0 +1,3 @@
+#!/bin/bash
+
+# changes server configuration (via server.properties) with a text GUI
