@@ -3,6 +3,21 @@
 set -e
 
 BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+FORCE=no
+
+while [[ "$1" =~ -* ]]; do
+	if [[ "$1" == "-a" ]]; then
+		echo "Force: yes"
+		exit
+	elif [[ "$1" == "-h" ]]; then
+		echo "help: yes"
+		exit
+	else
+		echo "Unknown option: $1"
+		exit 1
+	fi
+	shift
+done
 
 # cd to path of this script
 # https://stackoverflow.com/questions/6393551/what-is-the-meaning-of-0-in-a-bash-script
