@@ -161,7 +161,7 @@ echo
 echo "=== Server created ==="
 echo "Server $servername created at $MCPATH/$servername/"
 echo
-echo "Hinweise:"
-echo "- Bei Nutzung einer Firewall muss Port $PORT freigegeben werden."
-echo "- Der Server ist noch nicht gestartet. Starte ihn mit start $servername"
+echo "Notes:"
+echo "- When using a firewall, be sure to enable connections on port $PORT."
+echo "- The server has not been started. You can do so with \'start $servername\'"
 
