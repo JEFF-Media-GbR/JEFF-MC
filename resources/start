@@ -4,18 +4,17 @@ attach=no
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
+if [ "$1" == "-a" ]; then
+	attach=yes
+	shift
+fi
+
 # standard settings, dont change!
 # you can define per server settings in each server's jeffmc-server.conf
 # or global settings at ~/jeffmc.conf
 Xms=256M
 Xmx=1024M
 executable=$(find "$MCPATH/$1/." -maxdepth 1 -name \*.jar | sort | tail -n1)
-
-
-if [ "$1" == "-a" ]; then
-	attach=yes
-	shift
-fi
 
 [[ "$#" -lt 1 ]] && {
 	echoerr "no servername given. Usage: start [-a] <servername>"
