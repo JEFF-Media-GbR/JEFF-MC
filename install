@@ -5,13 +5,10 @@ set -e
 BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
 FORCE=no
 
+# -y option to skip first question
 while [[ "$1" == -* ]]; do
 	if [[ "$1" == "-y" ]]; then
-		echo "Force: yes"
-		exit
-	elif [[ "$1" == "-h" ]]; then
-		echo "help: yes"
-		exit
+		FORCE=yes
 	else
 		echo "Unknown option: $1"
 		exit 1
@@ -45,14 +42,16 @@ echo "Your Minecraft files can be stored in a different"
 echo "directory. You can specify the desired path at a later"
 echo "time in the file $HOME/jeffmc.conf"
 echo
-read -p "Continue installation to $HOME? [y/n]: " answer
+if [[ "$FORCE" != "yes" ]]; then
+	read -p "Continue installation to $HOME? [y/n]: " answer
 
-echo
-if [[ ! "$answer" =~ ^[yY][eE][sS]$|^[yY]$ ]]; then
-	echo "Installation cancelled!"
-	exit 1
+	echo
+	if [[ ! "$answer" =~ ^[yY][eE][sS]$|^[yY]$ ]]; then
+		echo "Installation cancelled!"
+		exit 1
+	fi
+	echo
 fi
-echo
 echo "Copying scripts to $HOME/bin"
 cd resources
 mkdir -p "$HOME/bin"
