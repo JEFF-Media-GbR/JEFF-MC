@@ -6,7 +6,7 @@ BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBu
 FORCE=no
 
 while [[ "$1" =~ -* ]]; do
-	if [[ "$1" == "-a" ]]; then
+	if [[ "$1" == "-y" ]]; then
 		echo "Force: yes"
 		exit
 	elif [[ "$1" == "-h" ]]; then
