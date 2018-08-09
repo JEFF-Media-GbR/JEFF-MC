@@ -14,7 +14,7 @@ fi
 
 lines=$(($(tput lines)-6))
 cols=$(($(tput cols)-6))
-menuheight=$(($(tput lines)-13))
+menuheight=$(($(tput lines)-20))
 servername="$1"
 xlabel=3
 xitem=30
@@ -22,9 +22,29 @@ y=1 # incremental
 tmprunfile=/tmp/jeffmc.config.run
 tmpanswerfile=/tmp/jeffmc.config.answers
 tmpkeysfile=/tmp/jeffmc.config.keys
+key=
+value=
 
 flen=$((cols-30))
 ilen=200
+flensmall=5
+ilensmall=5
+
+function getflen() {
+    if [[ "$key" == "false" ]] || [[ "$key" == "true" ]]; then
+        echo $flensmall
+    else
+        echo $flen
+    fi
+}
+
+function getilen() {
+    if [[ "$key" == "false" ]] || [[ "$key" == "true" ]]; then
+        echo $ilensmall
+    else
+        echo $ilen
+    fi
+}
 
 cd "$MCPATH" || {
     echoerr "could not enter $MCPATH"
@@ -54,7 +74,7 @@ while read line; do
         key=$(echo $line | cut -f 1 -d '=')
         value=$(echo $line | cut -f 2 -d '=')
         #array="\"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
-        array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
+        array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $(getflen) $(getilen)"
         echo $key >> $tmpkeysfile
         y=$((y+1))
     fi
