@@ -4,6 +4,8 @@
 
 # GLOBAL DEBUG
 # you can enable global debug messages. raise the number for more verbose output
+# Note: You can also set DEBUG in your jeffmc.conf, so that it will
+# not change with every update
 DEBUG=0
 
 # this should not be changed. do configuration in ~/jeffmc.conf
