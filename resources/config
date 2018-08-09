@@ -25,7 +25,8 @@ tmpkeysfile=/tmp/jeffmc.config.keys
 key=
 value=
 
-flen=$((cols-30))
+flen=$((cols-50))
+if [[ "$flen" -lt 10 ]]; then flen=10; fi
 ilen=200
 flensmall=6
 ilensmall=5
