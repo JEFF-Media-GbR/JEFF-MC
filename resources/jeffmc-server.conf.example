@@ -10,7 +10,7 @@
 executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)"
 
 # Maximum RAM usage
-Xmx=2048M
+Xmx=1024M
 
 # Initial RAM usage
 Xms=256M
