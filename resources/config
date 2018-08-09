@@ -26,6 +26,7 @@ key=
 value=
 
 flen=$((cols-50))
+if [[ "$flen" -gt 50 ]]; then flen=50; fi
 if [[ "$flen" -lt 10 ]]; then flen=10; fi
 ilen=200
 flensmall=6
