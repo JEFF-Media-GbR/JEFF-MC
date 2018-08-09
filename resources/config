@@ -14,7 +14,8 @@ fi
 
 lines=$(($(tput lines)-6))
 cols=$(($(tput cols)-6))
-menuheight=$(($(tput lines)-20))
+#menuheight=$(($(tput lines)-20))
+menuheight=15
 servername="$1"
 xlabel=3
 xitem=30
