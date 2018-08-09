@@ -22,6 +22,18 @@ servername="$1"
 	exit 1
 }
 
+function compilespigot() {
+	cd "$HOME/BuildTools" || { echoerr "directory $HOME/BuildTools not found"; exit 1; }
+	wget -O BuildTools.jar "$BUILDTOOLSLINK"
+	java -jar "$HOME/BuildTools/BuildTools.jar" --rev $VERSION
+	cd "$MCPATH"
+	if [[ "$?" != 0 ]] || [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
+	then
+		echoerr "Could not compile or locate Spigot version $VERSION"
+		exit 1
+	fi
+}
+
 
 echo "=== Creating server $servername ==="
 mkdir $servername
@@ -32,14 +44,15 @@ read -p "Spigot version [e.g. 1.12.2]: " VERSION
 if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
 then
 	echo "Spigot version $VERSION has not been compiled yet, starting BuildTools..."
-	cd "$HOME/BuildTools" || { echoerr "directory $HOME/BuildTools not found"; exit 1; }
-	wget -O BuildTools.jar "$BUILDTOOLSLINK"
-	java -jar "$HOME/BuildTools/BuildTools.jar" --rev $VERSION
-	cd "$MCPATH"
-	if [[ "$?" != 0 ]] || [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
-	then
-		echoerr "Could not compile or locate Spigot version $VERSION"
-		exit 1
+	compilespigot
+else
+	echo "Spigot version $VERSION has already been compiled, but we don't know if there is a new version."
+	read -p "Recompile Spigot version $VERSION? If you choose no, we will use the existing version. [y/n]: " yesno
+	if [[ "$yesno" =~ ^[Yy]$ ]]; then
+		echo "Recompiling Spigot version $VERSION, starting BuildTools..."
+		compilespigot
+	else
+		echo "Using existing Spigot version $VERSION"
 	fi
 fi
 
