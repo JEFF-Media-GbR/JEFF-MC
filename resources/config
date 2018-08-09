@@ -27,7 +27,7 @@ value=
 
 flen=$((cols-30))
 ilen=200
-flensmall=5
+flensmall=6
 ilensmall=5
 
 function getflen() {
