@@ -95,7 +95,7 @@ echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
 
 
-bash $tmprunfile
+bash $tmprunfile || exit
 rm -f $tmprunfile
 
 currentline=1 #incremental
