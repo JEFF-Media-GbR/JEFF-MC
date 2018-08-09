@@ -45,7 +45,7 @@ cp attach autostart _check config clone column2 create _functions restart update
 chmod u+x "$HOME"/bin/*
 
 echo "Copying config files to $HOME"
-cp autostart.list jeffmc.conf "$HOME/"
+cp autostart.list jeffmc.conf jeffmc-server.conf.example "$HOME/"
 
 echo "Applying config"
 echo "|- Patching username"
