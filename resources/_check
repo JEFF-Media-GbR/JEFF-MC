@@ -14,13 +14,14 @@ RED="$(tput setaf 1)"
 BOLD="$(tput bold)"
 RESET="$(tput sgr0)"
 
-function echoerr() { echo "error: $@" 1>&2; }
+function echoerr() { echo "error: $@" 1>&2; tput bel; }
 
 function echodeb() {
 	if [[ "$DEBUG" -gt "$1" ]]; then
 		CURRENTDEBUGLEVEL="$1"
 		shift
 		echo "[DEBUG ${CURRENTDEBUGLEVEL}] $@"
+		tput bel
 	fi
 }
 
