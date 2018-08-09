@@ -4,8 +4,9 @@
 
 # GLOBAL DEBUG
 # you can enable global debug messages. raise the number for more verbose output
-# Note: You can also set DEBUG in your jeffmc.conf, so that it will
-# not change with every update
+# Note: You MUST also raise the debug level in $HOME/jeffmc.conf
+# as that file will be parsed at the beginning.
+# The following debug level is only active until jeffmc.conf is parsed
 DEBUG=0
 
 # this should not be changed. do configuration in ~/jeffmc.conf
