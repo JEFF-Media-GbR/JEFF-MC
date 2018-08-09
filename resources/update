@@ -10,6 +10,6 @@ gitrepo="https://github.com/JEFF-Media-GbR/JEFF-MC"
 tmpdir="$(mktemp -d)"
 cd "$tmpdir"
 git clone "$gitrepo"
-yes | JEFF-MC/install
+JEFF-MC/install -y
 rm -rf "$tmpdir"
 cd "$oldpwd"
