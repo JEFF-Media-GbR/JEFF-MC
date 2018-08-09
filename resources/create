@@ -163,5 +163,5 @@ echo "Server $servername created at $MCPATH/$servername/"
 echo
 echo "Notes:"
 echo "- When using a firewall, be sure to enable connections on port $PORT."
-echo "- The server has not been started. You can do so with \'start $servername\'"
+echo "- The server has not been started. You can do so with 'start $servername'"
 
