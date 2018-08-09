@@ -5,7 +5,7 @@ set -e
 BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
 FORCE=no
 
-while [[ "$1" =~ -* ]]; do
+while [[ "$1" == -* ]]; do
 	if [[ "$1" == "-y" ]]; then
 		echo "Force: yes"
 		exit
