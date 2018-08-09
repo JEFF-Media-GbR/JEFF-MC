@@ -13,6 +13,7 @@ fi
 
 
 lines=$(($(tput lines)-6))
+if [[ "$lines" -gt 40 ]]; then lines=40; fi
 cols=$(($(tput cols)-6))
 menuheight=$(($(tput lines)-13))
 servername="$1"
