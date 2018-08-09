@@ -31,7 +31,7 @@ flensmall=5
 ilensmall=5
 
 function getflen() {
-    if [[ "$key" == "false" ]] || [[ "$key" == "true" ]]; then
+    if [[ "$value" == "false" ]] || [[ "$value" == "true" ]]; then
         echo $flensmall
     else
         echo $flen
@@ -39,7 +39,7 @@ function getflen() {
 }
 
 function getilen() {
-    if [[ "$key" == "false" ]] || [[ "$key" == "true" ]]; then
+    if [[ "$value" == "false" ]] || [[ "$value" == "true" ]]; then
         echo $ilensmall
     else
         echo $ilen
