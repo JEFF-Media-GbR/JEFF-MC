@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "autostart started at $(date)"
+
 if [[ "$RUN_BY_CRON"  == "TRUE" ]]; then
 	sleep 10
 fi
