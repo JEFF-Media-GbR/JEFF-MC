@@ -11,7 +11,7 @@ Log in as the user you want to run your servers as and run:
 git clone https://github.com/JEFF-Media-GbR/JEFF-MC
 JEFF-MC/install
 ```
-JEFF-MC requires at least the following packages: `git, screen, dialog, buildessential, gcc, bash` and a Java Runtime Engine. It has been tested on a minimal installation of Debian 9.
+JEFF-MC requires at least the following packages: `git screen dialog buildessential gcc bash` and a Java Runtime Engine. It has been tested on a minimal installation of Debian 9.
 
 ## Basic usage
 Let's create our first Minecraft server using Spigot:
