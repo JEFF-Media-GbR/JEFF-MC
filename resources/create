@@ -114,6 +114,7 @@ echo
 echo "eula.txt found!"
 "$HOME/bin/stop" $servername 2>/dev/null
 
+echo
 echo "To continue, you have to agree to Mojang's Minecraft EULA."
 echo "Link: https://account.mojang.com/documents/minecraft_eula"
 read -p "Do you agree to the terms? [y/n]: " eulayesno
