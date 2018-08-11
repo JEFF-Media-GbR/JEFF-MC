@@ -12,10 +12,10 @@ if [[ "$#" -lt 1 ]]; then
 fi
 
 lines=$(($(tput lines)-6))
-if [[ "$lines" -gt 40 ]]; then lines=40; fi
+#if [[ "$lines" -gt 40 ]]; then lines=40; fi
 cols=$(($(tput cols)-6))
 #menuheight=$(($(tput lines)-6))
-menuheight=16
+menuheight=$((lines-6))
 servername="$1"
 xlabel=3
 xitem=30
