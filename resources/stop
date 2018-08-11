@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
-
+# timeout in seconds after when the server stop seems to have failed
+# You can define a custom timeout in your $HOME/jeffmc.conf file or in each server's jeffmc-server.conf file.
 TIMEOUT=120
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 [[ "$#" -lt 1 ]] && {
 	echoerr "too few arguments. Usage: stop <servername>"
@@ -18,9 +20,18 @@ if [[ "$?" -ne 0 ]]; then
 	exit 1
 fi
 
+# read the servers config for custom timeout
+if [[ -f "$MCPATH/$1/jeffmc-server.conf" ]]; then
+	source "$MCPATH/$1/jeffmc-server.conf" || {
+		echoerr "could not parse server config file at $MCPATH/$1/jeffmc-server.conf"
+		exit 1
+	}
+fi
+
+
 screen -S "mc-$1" -X stuff 'stop\n'
 
-echo -n "waiting for server $1 to stop..."
+echo -n "waiting up to $TIMEOUT seconds for server $1 to stop..."
 
 try=0
 
@@ -36,4 +47,4 @@ do
 done
 echo
 
-echo "server $1 stopped"
+echo "server $1 succesfully stopped in $try seconds"
