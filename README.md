@@ -119,5 +119,12 @@ Installs the latest version of JEFF-MC. Please note: If you did custom configura
 
 Usage: `update`
 
+## TODO
+- Backup System
+- Automatic Restarts after crash
+- Detection of currently online players
+- Command line arguments for "create" command
+- Deploying plugins and server binaries for different servers and version with symbolic links
+
 ## Visit us
 Visit us at https://www.jeff-media.de
