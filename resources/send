@@ -17,8 +17,7 @@ then
 	servername="$1"
 	shift
 	command="$*"
-	screen -S mc-$servername -p 0 -X stuff "${command}
-" # newline, dont delete
+	screen -S mc-$servername -p 0 -X stuff "${command}$(printf \\r)"
 else
 	echoerr "server $1 is offline"
 fi
