@@ -13,7 +13,6 @@ source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readab
 
 needscommand screen
 
-
 padding=3
 servername="$1"
 
@@ -26,9 +25,17 @@ servername="$1"
 function getonline() {
 	"$HOME/bin/status" $1 &> /dev/null
 	if [[ "$?" -eq 0 ]]; then
-		echo "${GREEN}online${RESET}"
+		if [[ "$COLORED_STATUS" == "yes" ]]; then
+			echo "${GREEN}online${RESET}"
+		else
+			echo "online"
+		fi
 	else
-		echo "${RED}offline${RESET}"
+		if [[ "$COLORED_STATUS" == "yes" ]]; then
+			echo "${RED}offline${RESET}"
+		else
+			echo "offline"
+		fi
 	fi
 }
 
