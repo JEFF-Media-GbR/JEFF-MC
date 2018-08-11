@@ -40,14 +40,14 @@ echo "=== Creating server $servername ==="
 mkdir $servername
 echo "To create the server, we need a minecraft server binary. You have two options:"
 echo
-echo "1. You can put your own jar-file at $MCPATH/$1"
-echo "2. We can automatically compile and install Spigot (www.spigotmc.org)."
+echo " [1.] You can put your own jar-file at $MCPATH/$1"
+echo " [2.] We can automatically compile and install Spigot (www.spigotmc.org)."
 echo
 answer=""
-while [[ ! "$answer" =~ [oO] ]] && [[ ! "$answer" =~ [cC] ]]; do
-	read -p "Please choose: [o]wn jar-file or [c]ompile Spigot: " answer
+while [[ ! "$answer" -eq 1 ]] && [[ ! "$answer" -eq 2 ]]; do
+	read -p "Please choose: " answer
 done
-if [[ "$answer" =~ [oO] ]]; then
+if [[ "$answer" -eq 1 ]]; then
 	echo
 	echo "Please put your jar-file in the server's directory at $MCPATH/$1/"
 	read -n 1 -s -r -p "Press any key to continue when you are finished..."
@@ -75,7 +75,7 @@ if [[ "$answer" =~ [oO] ]]; then
 			read -p "Please enter the name of the jar-file you want to use: " jarname
 		done
 	fi	
-elif [[ "$answer" =~ [cC] ]]; then
+elif [[ "$answer" -eq 2 ]]; then
 read -p "Spigot version [e.g. 1.12.2]: " VERSION
 
 # Testen ob Version bereits kompiliert wurde
