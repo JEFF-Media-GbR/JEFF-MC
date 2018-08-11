@@ -66,11 +66,11 @@ if [[ "$answer" =~ [oO] ]]; then
 		echo "jar-file found: $jarname"
 	else
 		while [[ -z "$jarname" ]] || [[ ! -f "$jarname" ]]; do
+			echo
 			if [[ ! -z "$jarname" ]]; then
 				echoerr "jar-file $jarname not found at $MCPATH/$1"
 				echo
 			fi
-			echo
 			echo
 			echo "Warning: We found more than one jar-file at $MCPATH/$1:"
 			ls -1 "$MCPATH/$1" | grep .jar$
