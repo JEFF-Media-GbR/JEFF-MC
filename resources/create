@@ -10,6 +10,8 @@ VERSION=""
 PORT=""
 WARNINGS=""
 
+needscommand screen
+
 [[ "$#" -lt 1 ]] && {
 	echoerr "no servername given. Usage: create <servername>"
 	exit 1
