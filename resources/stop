@@ -29,7 +29,7 @@ if [[ -f "$MCPATH/$1/jeffmc-server.conf" ]]; then
 fi
 
 
-screen -S "mc-$1" -p 0 -X stuff "$(printf \\r)"
+screen -S "mc-$1" -p 0 -X stuff "stop$(printf \\r)"
 
 echo -n "waiting up to $TIMEOUT seconds for server $1 to stop..."
 
