@@ -65,7 +65,7 @@ if [[ "$answer" =~ [oO] ]]; then
 		echo
 		echo "jar-file found: $jarname"
 	else
-		while [[ -z "$jarname" ]] || [[ ! -f "$jarname" ]]; do
+		while [[ -z "$jarname" ]] || [[ ! -f "$MCPATH/$1/$jarname" ]]; do
 			echo
 			if [[ ! -z "$jarname" ]]; then
 				echoerr "jar-file $jarname not found at $MCPATH/$1"
