@@ -31,7 +31,7 @@ ilen=200
 flensmall=6
 ilensmall=5
 
-function getflen() {
+function getlen() {
     if [[ "$value" == "false" ]] \
     || [[ "$value" == "true" ]] \
     || [[ "$key" == "server-port" ]] \
@@ -39,23 +39,9 @@ function getflen() {
     || [[ "$key" == "gamemode" ]] \
     || [[ "$key" == "mxa-players" ]] \
     || [[ "$key" == "view-distance" ]]; then
-        echo $flensmall
+        if [[ "$1" == "f" ]]; then echo $flensmall; else echo $ilensmall; fi
     else
-        echo $flen
-    fi
-}
-
-function getilen() {
-    if [[ "$value" == "false" ]] \
-    || [[ "$value" == "true" ]] \
-    || [[ "$key" == "server-port" ]] \
-    || [[ "$key" == "difficulty" ]]  \
-    || [[ "$key" == "gamemode" ]] \
-    || [[ "$key" == "mxa-players" ]] \
-    || [[ "$key" == "view-distance" ]]; then
-        echo $ilensmall
-    else
-        echo $ilen
+        if [[ "$1" == "f" ]]; then echo $flen: else echo $ilen; fi
     fi
 }
 
@@ -87,7 +73,7 @@ while read line; do
         key=$(echo $line | cut -f 1 -d '=')
         value=$(echo $line | cut -f 2 -d '=')
         #array="\"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
-        array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $(getflen) $(getilen)"
+        array="$array \"$key\" $y $xlabel \"$value\" $y $xitem $(getlen f) $(getlen i)"
         echo $key >> $tmpkeysfile
         y=$((y+1))
     fi
