@@ -11,7 +11,6 @@ if [[ "$#" -lt 1 ]]; then
     exit 1
 fi
 
-
 lines=$(($(tput lines)-6))
 if [[ "$lines" -gt 40 ]]; then lines=40; fi
 cols=$(($(tput cols)-6))
@@ -25,7 +24,6 @@ tmpanswerfile=/tmp/jeffmc.config.answers
 tmpkeysfile=/tmp/jeffmc.config.keys
 key=
 value=
-
 flen=$((cols-50))
 if [[ "$flen" -gt 80 ]]; then flen=80; fi
 if [[ "$flen" -lt 10 ]]; then flen=10; fi
@@ -97,7 +95,6 @@ echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
 
-
 bash $tmprunfile || exit
 rm -f $tmprunfile
 
@@ -113,4 +110,3 @@ while read line; do
     echo "${key}=${value}" >> server.properties
     currentline=$((currentline+1))
 done < $tmpkeysfile
-
