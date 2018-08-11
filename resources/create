@@ -47,7 +47,7 @@ echo "2. We can automatically compile and install Spigot (www.spigotmc.org)."
 echo
 answer=""
 while [[ ! "$answer" =~ [oO] ]] && [[ ! "$answer" =~ [cC] ]]; do
-	read -p "Please choose: [o]wn jar-file or [c]ompile Spigot" answer
+	read -p "Please choose: [o]wn jar-file or [c]ompile Spigot: " answer
 done
 if [[ "$answer" =~ [oO] ]]; then
 	echo
