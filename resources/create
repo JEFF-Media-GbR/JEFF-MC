@@ -5,7 +5,6 @@
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
-
 VERSION=""
 PORT=""
 WARNINGS=""
@@ -36,7 +35,6 @@ function compilespigot() {
 		exit 1
 	fi
 }
-
 
 echo "=== Creating server $servername ==="
 mkdir $servername
@@ -116,13 +114,6 @@ echo
 echo "eula.txt found!"
 "$HOME/bin/stop" $servername 2>/dev/null
 
-#while "$HOME/bin/status" $servername &> /dev/null
-#do
-#	echo -n "."
-#	sleep 1
-#done
-#echo
-
 echo "Patching eula.txt"
 sed -i 's/eula=false/eula=true/g' "$MCPATH/$servername/eula.txt"
 echo "Deleting server.properties"
@@ -165,7 +156,7 @@ while [[ "$PORTOK" == "no" ]]; do
 				echo "warning: server $server is already using port $PORT"
 				echo
 				echo "When you have two servers running on the same port, they cannot run at the same time."
-				read -p "Do you want to [c]ontinue, change the [p]ort or [a]bort? [c/p/a]: " -n 1 -r tmpanswer
+				read -p "Do you want to [c]ontinue, change the [p]ort or [a]bort? [c/p/a]: " tmpanswer
 				echo
 					if [[ "$tmpanswer" =~ ^[Aa]$ ]]; then
 						echo "aborting..."
@@ -209,4 +200,3 @@ echo
 echo "Notes:"
 echo "- When using a firewall, be sure to enable connections on port $PORT."
 echo "- The server has not been started. You can do so with 'start $servername'"
-
