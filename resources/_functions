@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 function getport() {
         [[ "$#" -ne 1 ]] && {
                 echoerr "too few arguments. Usage: getport <servername>"
@@ -15,4 +13,3 @@ function getport() {
 function needscommand() {
         command -v "$1" >/dev/null 2>&1 || { echo >&2 "This script requires the command \"$1\" but it's not installed.  Aborting."; exit 1; }
 }
-
