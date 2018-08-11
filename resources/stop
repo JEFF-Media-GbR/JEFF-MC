@@ -41,6 +41,7 @@ do
 	sleep 1
 	try=$((try+1))
 	if [[ $try -gt $TIMEOUT ]]; then
+		echo
 		echoerr "could not stop server $1"
 		exit 1
 	fi
