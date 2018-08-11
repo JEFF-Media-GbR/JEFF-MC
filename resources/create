@@ -142,6 +142,11 @@ echo "server.properties found!"
 echo "generating default jeffmc-server.conf file"
 cp "$HOME/resources/jeffmc-server.conf.example" "$MCPATH/$servername/jeffmc-server.conf"
 
+if [[ ! -z "$jarname" ]] && [[ -f "$MCPATH/$1/$jarname" ]]; then
+	echo "setting executable=$jarname in jeffmc-server.conf"
+	sed -i 's/^#executable=.*/executable='"$jarname"'/' "$MCPATH/$1/jeffmc-server.conf"
+fi
+
 echo
 echo "=== Basic configuration ==="
 
