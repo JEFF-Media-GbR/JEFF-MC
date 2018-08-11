@@ -78,8 +78,8 @@ echo "Downloading BuildTools from $BUILDTOOLSLINK"
 wget -O "$HOME/BuildTools/BuildTools.jar" "$BUILDTOOLSLINK"
 
 echo "Installing cron for ~/bin/autostart"
-if [[ "$(crontab -l | grep '@reboot $HOME/bin/autostart' | wc -l)" -eq 0 ]]; then
-	(crontab -l ; echo '@reboot $HOME/bin/autostart') | crontab -
+if [[ "$(crontab -l | grep "@reboot ${HOME}/bin/autostart" | wc -l)" -eq 0 ]]; then
+	(crontab -l ; echo "@reboot ${HOME}/bin/autostart") | crontab -
 else
 	echo "cron was already installed."
 fi
