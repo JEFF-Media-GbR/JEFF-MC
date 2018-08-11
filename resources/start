@@ -16,7 +16,7 @@ fi
 # or global settings at ~/jeffmc.conf
 Xms=256M
 Xmx=1024M
-executable=$(find "$MCPATH/$1/." -maxdepth 1 -name \*.jar | sort | tail -n1)
+executable=$(find "$MCPATH/$1/." -maxdepth 1 -name \*.jar | sort | tail -n1 2>/dev/null)
 
 [[ "$#" -lt 1 ]] && {
 	echoerr "no servername given. Usage: start [-a] <servername>"
@@ -24,7 +24,7 @@ executable=$(find "$MCPATH/$1/." -maxdepth 1 -name \*.jar | sort | tail -n1)
 }
 cd "$MCPATH" || { echoerr "$MCPATH not found."; exit 1; }
 
-cd "$1" || { echoerr "server $1 not found at $MCPATH/$1"; exit 1; }
+cd "$1" 2>/dev/null || { echoerr "server $1 not found at $MCPATH/$1"; exit 1; }
 
 "$HOME/bin/status" $1 &>/dev/null
 
