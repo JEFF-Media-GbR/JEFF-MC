@@ -45,6 +45,8 @@ function getlen() {
     fi
 }
 
+echo "debug 1"
+
 cd "$MCPATH" || {
     echoerr "could not enter $MCPATH"
     exit 1
