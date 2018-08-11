@@ -96,7 +96,7 @@ touch $tmpanswerfile || {
     exit 1
 }
 
-echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" $lines $cols $menuheight " > $tmprunfile 
+echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nServer: $servername\\nFile: server.properties\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
 
