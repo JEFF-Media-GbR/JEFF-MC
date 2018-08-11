@@ -17,7 +17,7 @@ Let's create our first Minecraft server using Spigot:
 ```
 create testserver
 ```
-When asked if you want to automatically install Spigot, confirm with c. You will be aksed to enter a version number. Let's take 1.12.2. JEFF-MC will now run BuildTools to build the specified Spigot version and copy it to your server's directory. Please wait a few seconds while JEFF-MC starts the server to generate the server.properties file.
+When asked if you want to automatically install Spigot, press 2. You will be aksed to enter a version number. Let's take 1.12.2. JEFF-MC will now run BuildTools to build the specified Spigot version and copy it to your server's directory. Please wait a few seconds while JEFF-MC starts the server to generate the server.properties file.
 You will now be asked to enter a few configuration details (port, maxplayers, gamemode, ...). To use the default setting, just press Return for each question.
 
 Now we can start our server:
