@@ -75,7 +75,7 @@ echodeb 3 "$HOME/bin is a directory"
 echodeb 2 "checking if defined MCUSER $MCUSER equals current user $USER"
 ##### correct user?
 if [[ "$USER" != "$MCUSER" ]]; then
-	echoerr "only $MCUSER can run this script"
+	echoerr "only $MCUSER can run this script (you are $USER)"
         exit 1
 fi
 echodeb 3 "OK: current user is MCUSER $MCUSER"
