@@ -43,4 +43,9 @@ Clone a server. This will copy all files in the server's directory to a new serv
 
 Usage `clone <source-servername> <destination-servername>`
 
+### config
+Configure a server. You can adjust all entries from server.properties in a dialog-interface.
+
+Usage: `config <servername>`
+
 ... this Readme will be updated soon.
