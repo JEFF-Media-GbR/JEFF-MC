@@ -3,17 +3,20 @@
 # you can use bash features such as $(...)
 
 # Name of your server executable (e.g. spigot-latest.jar)
+# Comment out if you want to override the default value set in the global jeffmc.conf
 # The default setting will use the first .jar file found
 # e.g.: executable="spigot-latest.jar"
 #       executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)" # default
 #       executable="*.jar" # do not use this if you have more than one jar in your server directory!
-executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)"
+#executable="$(find . -maxdepth 1 -name \*.jar | sort | tail -n1)"
 
 # Maximum RAM usage
-Xmx=1024M
+# Comment out if you want to override the default value set in the global jeffmc.conf
+#Xmx=1024M
 
 # Initial RAM usage
-Xms=256M
+# Comment out if you want to override the default value set in the global jeffmc.conf
+#Xms=256M
 
 # Seconds until a server stopping attempt seems to have failed.
 # Comment out if you want to override the default value set in the global jeffmc.conf
