@@ -4,13 +4,20 @@ source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readab
 
 servername="$1"
 
+needscommand screen
+
 if [[ -z "$servername" ]]; then
 	echoerr "too few arguments. Usage: attach <servername>"
 	exit 1
 else
-	if "$HOME/bin/status" $1 &>/dev/null; then
+	if [[ ! -d "$MCPATH/$1" ]]; then
+		echoerr "server $servername not found at $MCPATH/$1"
+		exit 1
+	elif "$HOME/bin/status" $1 &>/dev/null; then
 		screen -r -S "mc-$servername"
+		exit 0
 	else
-		echoerr "server $servername not found or offline"
+		echoerr "server $servername is offline"
+		exit 1
 	fi
 fi
