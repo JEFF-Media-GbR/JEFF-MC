@@ -37,15 +37,16 @@ function getlen() {
     || [[ "$key" == "gamemode" ]]; then
         if [[ "$1" == "f" ]]; then echo "2"; else echo "1"; fi
     elif [[ "$key" == "max-world-size" ]]; then
-        if [[ "$1" == "f" ]]; then echo "9"; else echo "8"; fi # max-world-size is 299k something
+        if [[ "$1" == "f" ]]; then echo "9"; else echo "8"; fi # mxa max-world-size is 29999984, so we dont need more than 8 digits
+    elif [[ "$key" == "view-distance" ]]; then
+        if [[ "$1" == "f" ]]; then echo "3"; else echo "2"; fi # max viewdistance is 15 (or something), so we dont need more than 2 digits
     elif [[ "$value" == "false" ]] \
     || [[ "$value" == "true" ]] \
     || [[ "$key" == "server-port" ]] \
     || [[ "$key" == "gamemode" ]] \
     || [[ "$key" == "max-players" ]] \
     || [[ "$key" == "player-idle-timeout" ]] \
-    || [[ "$key" == "spawn-protection" ]] \
-    || [[ "$key" == "view-distance" ]]; then
+    || [[ "$key" == "spawn-protection" ]]; then
         if [[ "$1" == "f" ]]; then echo "$flensmall"; else echo "$ilensmall"; fi
     else
         if [[ "$1" == "f" ]]; then echo "$flen"; else echo "$ilen"; fi
