@@ -52,3 +52,41 @@ Configure a server. You can adjust settings like java arguments, and even in-gam
 Usage: `config <servername>`
 
 ... this Readme will be updated soon.
+
+### create
+Creates a new server. You can automatically install a custom Spigot version, or use your own jar-file. You will be asked a few basic configuration questions, such es port and maxplayers.
+
+Usage: `create <servername>`
+
+Hint: In further versions, create will understand command line arguments to make it useable in scripts. Right now, to batch create servers, you have to create it once and then clone the server as often as you like.
+
+### restart
+Restart a running server.
+
+Usage: `restart <servername>`
+
+### rmserver
+Remove a server including all its files.
+
+Usage: `rmserver <servername>`
+
+Hint: rmserver requires confirmation. If you want to delete a server non-interactively, use `yes | rmserver <servername>`
+
+### send
+Send a command to a running server.
+
+Usage: `send <servername> <command>`
+
+Example: `send myserver time set day`
+
+### start
+Start a server. Use the option `-a` to automatically attach to the screen session.
+
+Usage: ´send [-a] <servername>`
+
+### status
+Show a list of all your servers indicating their status, or get the status of a specific server.
+
+Usage: `status` or `status <servername>`
+
+Example output: ![Screenshot config](https://static.jeff-media.de/i/config.png "Screenshot config")
