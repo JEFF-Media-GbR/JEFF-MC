@@ -84,6 +84,8 @@ while read line; do
     fi
 done < server.properties
 
+echo $array
+
 touch $tmprunfile || {
     echoerr "could not create file $tmprunfile"
     exit 1
@@ -97,6 +99,8 @@ touch $tmpanswerfile || {
 echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nCopyright 2018 JEFFmedia GbR\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
+
+cat $tmprunfile
 
 bash $tmprunfile || exit
 rm -f $tmprunfile
