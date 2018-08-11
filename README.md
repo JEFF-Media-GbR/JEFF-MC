@@ -30,6 +30,15 @@ start testserver
 
 To attach to the server's screen, use `attach testserver`. You can also start the server using `start -a testserver`, so that it will directly attach.
 
+## Configuration
+Configuration is mainly split up into two locations: the global jeffmc.conf file located at $HOME, and one jeffmc-server.conf file in each server's directory. The configuration is loaded in three steps:
+
+1. Default values hardcoded into JEFF-MC
+2. Global configuration file at $HOME/jeffmc.conf
+3. Server-specific configuration file jeffmc-server.conf inside server's directory
+
+The configuration options are explained in the files.
+
 ## Available Commands
 ### attach
 Attach to a running server console via screen.
