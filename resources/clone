@@ -51,5 +51,3 @@ cp -${cpshortargs} "$MCPATH/$sourceserver/." "$MCPATH/$destinationserver"
 
 echo "Server $sourceserver cloned to $destinationserver"
 exit 0
-
-
