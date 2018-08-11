@@ -1,7 +1,7 @@
 # JEFF-MC
-Minecraft/Spigot Server Launcher using Bash
+Minecraft/Spigot Server Launcher using bash and screen
 
-A complete Minecraft server launcher! You can deploy as many server instances as you wish, attach to their screens, execute commands, edit their configurations, and much more!
+*A complete Minecraft server launcher!* You can deploy as many server instances as you wish, attach to their screens, execute commands, edit their configurations, and much more!
 
 JEFF-MC will setup an environment for the user you want to run your minecraft servers as. It will create a number of scripts in that users ~/bin directory, such as ~/bin/start start to start a server, or ~/bin/status status to view its status. When you include ~/bin in your $PATH, you will be able to run the commands without specifying their full name.
 
