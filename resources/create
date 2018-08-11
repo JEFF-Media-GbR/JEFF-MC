@@ -99,12 +99,8 @@ echo
 echo "server.properties found!"
 "$HOME/bin/stop" $servername 
 
-#while "$HOME/bin/status" $servername > /dev/null
-#do
-#        echo -n "."
-#        sleep 1
-#done
-#echo
+echo "generating default jeffmc-server.conf file"
+cp "$HOME/resources/jeffmc-server.conf.example" "$MCPATH/$servername/jeffmc-server.conf"
 
 echo
 echo "=== Basic configuration ==="
