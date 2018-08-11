@@ -89,4 +89,5 @@ Show a list of all your servers indicating their status, or get the status of a 
 
 Usage: `status` or `status <servername>`
 
-Example output: ![Screenshot config](http://static.jeff-media.de/i/config.png "Screenshot config")
+Example output:
+![Screenshot config](https://static.jeff-media.de/i/status.png "Screenshot config")
