@@ -12,6 +12,5 @@ if [[ ! -f "$HOME/autostart.list" ]]; then
 fi
 
 while read servername; do
-	"$HOME/bin/start" "$servername"
+	"$HOME/bin/start" "$servername" > /dev/null
 done <"$HOME/autostart.list"
-
