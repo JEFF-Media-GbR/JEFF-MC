@@ -166,15 +166,19 @@ while [[ "$PORTOK" == "no" ]]; do
 				echo "warning: server $server is already using port $PORT"
 				echo
 				echo "When you have two servers running on the same port, they cannot run at the same time."
-				read -p "Do you want to [c]ontinue, change the [p]ort or [a]bort? [c/p/a]: " tmpanswer
+				echo "Do you want to"
+				echo " [1.] continue"
+				echo " [2.] change the port"
+				echo " [3.] abort"
+				read -p "Please choose: " tmpanswer
 				echo
-					if [[ "$tmpanswer" =~ ^[Aa]$ ]]; then
+					if [[ "$tmpanswer" -eq 3 ]]; then
 						echo "aborting..."
 						yes | "$HOME/bin/rmserver" $servername
 						exit 1
-					elif [[ "$tmpanswer" =~ ^[Pp]$ ]]; then
+					elif [[ "$tmpanswer" -eq 2 ]]; then
 						continue;
-					elif [[ "$tmpanswer" =~ ^[Cc]$ ]]; then
+					elif [[ "$tmpanswer" -eq 1 ]]; then
 						PORTOK=yes
 					else
 						echoerr "could not understand. Aborting..."
