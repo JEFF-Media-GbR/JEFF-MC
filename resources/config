@@ -39,9 +39,9 @@ function getlen() {
     || [[ "$key" == "gamemode" ]] \
     || [[ "$key" == "mxa-players" ]] \
     || [[ "$key" == "view-distance" ]]; then
-        if [[ "$1" == "f" ]]; then echo $flensmall; else echo $ilensmall; fi
+        if [[ "$1" == "f" ]]; then echo "$flensmall"; else echo "$ilensmall"; fi
     else
-        if [[ "$1" == "f" ]]; then echo $flen: else echo $ilen; fi
+        if [[ "$1" == "f" ]]; then echo "$flen"; else echo "$ilen"; fi
     fi
 }
 
