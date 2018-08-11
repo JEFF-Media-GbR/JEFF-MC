@@ -12,12 +12,12 @@ DEBUG=0
 # this should not be changed. do configuration in ~/jeffmc.conf
 CONFIGFILE="$HOME/jeffmc.conf"
 
-GREEN="$(tput setaf 2)"
-RED="$(tput setaf 1)"
-BOLD="$(tput bold)"
-RESET="$(tput sgr0)"
+GREEN="$(tput setaf 2 2>/dev/null)"
+RED="$(tput setaf 1 2>/dev/null)"
+BOLD="$(tput bold 2>/dev/null)"
+RESET="$(tput sgr0 2>/dev/null)"
 
-function echoerr() { echo "error: $@" 1>&2; tput bel; }
+function echoerr() { echo "error: $@" 1>&2; tput bel 2>/dev/null; }
 
 function echodeb() {
 	if [[ "$DEBUG" -gt "$1" ]]; then
