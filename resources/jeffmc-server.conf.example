@@ -14,3 +14,7 @@ Xmx=1024M
 
 # Initial RAM usage
 Xms=256M
+
+# Seconds until a server stopping attempt seems to have failed.
+# Comment out if you want to override the default value set in the global jeffmc.conf
+#TIMEOUT=180
