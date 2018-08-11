@@ -105,7 +105,7 @@ touch $tmpanswerfile || {
     exit 1
 }
 
-echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nServer: $servername\\nFile: server.properties\" $lines $cols $menuheight " > $tmprunfile 
+echo -n "dialog --aspect 1 --title \"JEFF-MC: Server configuration\" --form \"\\nServer: $servername\\nFile: server.properties\" $lines $cols $menuheight " > $tmprunfile 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
 
