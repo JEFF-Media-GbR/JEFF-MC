@@ -16,7 +16,7 @@ fi
 # or global settings at ~/jeffmc.conf
 Xms=256M
 Xmx=1024M
-executable=$(find "$MCPATH/$1/." -maxdepth 1 -name \*.jar | sort | tail -n1)
+executable=$(find "$MCPATH/$1" -maxdepth 1 -name \*.jar | sort | tail -n1)
 
 [[ "$#" -lt 1 ]] && {
 	echoerr "no servername given. Usage: start [-a] <servername>"
