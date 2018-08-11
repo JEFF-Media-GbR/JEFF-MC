@@ -74,7 +74,7 @@ if [[ "$answer" =~ [oO] ]]; then
 			echo
 			echo "Warning: We found more than one jar-file at $MCPATH/$1:"
 			ls -1 "$MCPATH/$1" | grep .jar$
-			read -p "Please enter the name of the jar-file you want to use:" jarname
+			read -p "Please enter the name of the jar-file you want to use: " jarname
 		done
 	fi	
 elif [[ "$answer" =~ [cC] ]]; then
