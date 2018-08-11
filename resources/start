@@ -4,6 +4,8 @@ attach=no
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
+needscommand screen
+
 if [ "$1" == "-a" ]; then
 	attach=yes
 	shift
