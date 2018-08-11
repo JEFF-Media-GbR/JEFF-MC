@@ -37,7 +37,7 @@ function getlen() {
     || [[ "$key" == "server-port" ]] \
     || [[ "$key" == "difficulty" ]]  \
     || [[ "$key" == "gamemode" ]] \
-    || [[ "$key" == "mxa-players" ]] \
+    || [[ "$key" == "max-players" ]] \
     || [[ "$key" == "view-distance" ]]; then
         if [[ "$1" == "f" ]]; then echo "$flensmall"; else echo "$ilensmall"; fi
     else
