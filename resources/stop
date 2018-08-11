@@ -29,7 +29,8 @@ if [[ -f "$MCPATH/$1/jeffmc-server.conf" ]]; then
 fi
 
 
-screen -S "mc-$1" -X kill
+screen -S "mc-$1" -X stuff "stop
+" # dont remove newline
 
 echo -n "waiting up to $TIMEOUT seconds for server $1 to stop..."
 
