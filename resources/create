@@ -162,7 +162,7 @@ while ! [[ $Xmx =~ $re ]] ; do
    read -p "Max. RAM in MB [1024]: " Xmx
 done
 
-if [[ ! -z "$Xmx" ]]; then
+if [[ -z "$Xmx" ]]; then
 	Xmx=1024
 fi
 echo "setting Xmx=$Xmx in jeffmc-server.conf"
