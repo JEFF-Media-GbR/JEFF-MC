@@ -61,6 +61,8 @@ if [[ "$answer" =~ [oO] ]]; then
 	done
 	if [[ "$(ls -1 "$MCPATH/$1" | grep .jar$ | wc -l)" -eq 1 ]]; then
 		jarname="$(ls -1 "$MCPATH/$1" | grep .jar$ )"
+		echo
+		echo
 		echo "jar-file found: $jarname"
 	else
 		while [[ -z "$jarname" ]] || [[ ! -f "$jarname" ]]; do
@@ -73,7 +75,6 @@ if [[ "$answer" =~ [oO] ]]; then
 			read -p "Please enter the name of the jar-file you want to use:" jarname
 		done
 	fi	
-fi
 elif [[ "$answer" =~ [cC] ]]; then
 read -p "Spigot version [e.g. 1.12.2]: " VERSION
 
