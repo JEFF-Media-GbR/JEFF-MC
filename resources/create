@@ -9,6 +9,7 @@ BUILDTOOLSLINK="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBu
 VERSION=""
 PORT=""
 WARNINGS=""
+jarname=""
 
 needscommand screen
 
@@ -61,14 +62,18 @@ if [[ "$answer" =~ [oO] ]]; then
 		jarname="$(ls -1 "$MCPATH/$1" | grep .jar$ )"
 		echo "jar-file found: $jarname"
 	else
-		echo "Warning: We found more than one jar-file at $MCPATH/$1."
-		echo "Please adjust your jeffmc-server.conf file if you want to control which jar should be used."
-		read -n 1 -s -r -p "Press any key to continue..."
-	fi
-	
-	
+		while [[ -z "$jarname" ]] || [[ ! -f "$jarname" ]]; do
+			if [[ ! -z "$jarname" ]]; then
+				echoerr "jar-file $jarname not found at $MCPATH/$1"
+				echo
+			fi
+			echo "Warning: We found more than one jar-file at $MCPATH/$1:"
+			ls -1 "$MCPATH/$1" | grep .jar$
+			read -p "Please enter the name of the jar-file you want to use:" jarname
+		done
+	fi	
 fi
-
+elif [[ "$answer" =~ [cC] ]]; then
 read -p "Spigot version [e.g. 1.12.2]: " VERSION
 
 # Testen ob Version bereits kompiliert wurde
@@ -89,6 +94,10 @@ fi
 
 cp "$HOME/BuildTools/spigot-$VERSION.jar" "$servername"/
 echo "Spigot version $VERSION has been installed to $MCPATH/$servername/spigot-$VERSION.jar"
+
+else
+	echoerr "could not understand: $answer"
+fi
 echo
 echo -n "Starting server to generate eula.txt..."
 "$HOME/bin/start" $servername >/dev/null
