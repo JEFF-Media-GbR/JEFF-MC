@@ -70,8 +70,11 @@ touch $tmpkeysfile || {
 }
 echo -n "" > $tmpkeysfile
 
+echo "debug 2"
+
 while read line; do
     if [[ ${line:0:1} != '#' ]]; then
+        echo "debug 3 $key $value"
         key=$(echo $line | cut -f 1 -d '=')
         value=$(echo $line | cut -f 2 -d '=')
         #array="\"$key\" $y $xlabel \"$value\" $y $xitem $flen $ilen"
