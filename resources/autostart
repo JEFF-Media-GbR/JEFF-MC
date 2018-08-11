@@ -1,7 +1,8 @@
 #!/bin/bash
-
+{
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 while read servername; do
 	"$HOME/bin/start" "$servername"
 done <"$HOME/autostart.list"
+} > /tmp/autostart.jeffmc.log
