@@ -1,12 +1,14 @@
 #!/bin/bash
-{
+echo "" > /tmp/autostart.jeffmc.log
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 if [[ ! -f "$HOME/autostart.list" ]]; then
-	echo "Keine Datei gefunden!"
+	echoerr "could not find $HOME/autostart.list"
+	exit 1
 fi
 
 while read servername; do
+	echo "starting server $servername @ $(date)" >> /tmp/autostart.jeffmc.log
 	"$HOME/bin/start" "$servername"
 done <"$HOME/autostart.list"
-} > /tmp/autostart.jeffmc.log
+
