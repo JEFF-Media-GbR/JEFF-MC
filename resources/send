@@ -20,5 +20,5 @@ then
 	screen -S mc-$servername -X stuff "${command}
 " # newline, dont delete
 else
-	echoerr "server $1 is not online."
+	echoerr "server $1 is offline"
 fi
