@@ -46,7 +46,7 @@ if [[ -f "jeffmc-server.conf" ]]; then
 fi
 
 echodeb 1 "starting server $1 in screen-session mc-$1 with following command:"
-echodeb 1 "java -Xmx${Xms} -Xms${Xms} -jar $executable"
+echodeb 1 "java -Xmx${Xmx} -Xms${Xms} -jar $executable"
 
 screen -dmS "mc-$1" java -Xmx${Xmx} -Xms${Xms} -jar "$executable"
 
