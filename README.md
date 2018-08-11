@@ -51,7 +51,9 @@ Configure a server. You can adjust settings like java arguments, and even in-gam
 
 Usage: `config <servername>`
 
-... this Readme will be updated soon.
+Screenshot:
+
+![Screenshot config](https://static.jeff-media.de/i/config.png "Screenshot config")
 
 ### create
 Creates a new server. You can automatically install a custom Spigot version, or use your own jar-file. You will be asked a few basic configuration questions, such es port and maxplayers.
@@ -82,13 +84,13 @@ Example: `send myserver time set day`
 ### start
 Start a server. Use the option `-a` to automatically attach to the screen session.
 
-Usage: ´send [-a] <servername>`
+Usage: `send [-a] <servername>`
 
 ### status
 Show a list of all your servers indicating their status, or get the status of a specific server.
 
 Usage: `status` or `status <servername>`
 
-Example output:
+Screenshot:
 
-![Screenshot config](https://static.jeff-media.de/i/status.png "Screenshot config")
+![Screenshot status](https://static.jeff-media.de/i/status.png "Screenshot status")
