@@ -12,7 +12,7 @@ source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readab
 }
 
 cd $MCPATH
-cd "$1" || { echoerr "server $1 not found in $MCPATH/$1"; exit 1; }
+cd "$1" 2>/dev/null || { echoerr "server $1 not found in $MCPATH/$1"; exit 1; }
 
 "$HOME/bin/status" $1 &>/dev/null
 if [[ "$?" -ne 0 ]]; then
