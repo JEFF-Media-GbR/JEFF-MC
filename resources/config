@@ -24,20 +24,27 @@ tmpanswerfile=/tmp/jeffmc.config.answers
 tmpkeysfile=/tmp/jeffmc.config.keys
 key=
 value=
-flen=$((cols-50))
-if [[ "$flen" -gt 80 ]]; then flen=80; fi
+flen=$((cols-xitem-xlabel-xlabel-xlabel))
+#if [[ "$flen" -gt 80 ]]; then flen=80; fi
 if [[ "$flen" -lt 10 ]]; then flen=10; fi
 ilen=200
 flensmall=6
 ilensmall=5
 
 function getlen() {
-    if [[ "$value" == "false" ]] \
+    if [[ "$key" == "op-permission-level" ]] \
+    || [[ "$key" == "difficulty" ]]  \
+    || [[ "$key" == "gamemode" ]]; then
+        if [[ "$1" == "f" ]]; then echo "2"; else echo "1"; fi
+    elif [[ "$key" == "max-world-size" ]]; then
+        if [[ "$1" == "f" ]]; then echo "9"; else echo "8"; fi # max-world-size is 299k something
+    elif [[ "$value" == "false" ]] \
     || [[ "$value" == "true" ]] \
     || [[ "$key" == "server-port" ]] \
-    || [[ "$key" == "difficulty" ]]  \
     || [[ "$key" == "gamemode" ]] \
     || [[ "$key" == "max-players" ]] \
+    || [[ "$key" == "player-idle-timeout" ]] \
+    || [[ "$key" == "spawn-protection" ]] \
     || [[ "$key" == "view-distance" ]]; then
         if [[ "$1" == "f" ]]; then echo "$flensmall"; else echo "$ilensmall"; fi
     else
