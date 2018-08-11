@@ -5,6 +5,8 @@
 
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
+needscommand screen
+
 [[ "$#" -lt 2 ]] && {
 	echoerr "too few parameters. Usage: send <servername> <command...>"
 	exit 1
