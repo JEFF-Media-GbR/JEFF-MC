@@ -9,6 +9,7 @@ VERSION=""
 PORT=""
 WARNINGS=""
 jarname=""
+Xmx=""
 
 needscommand screen
 
@@ -150,9 +151,16 @@ if [[ ! -z "$jarname" ]] && [[ -f "$MCPATH/$1/$jarname" ]]; then
 	sed -i 's/^#executable=.*/executable='"$jarname"'/' "$MCPATH/$1/jeffmc-server.conf"
 fi
 
-echo
-echo "=== Basic configuration ==="
+if [[ ! -z "$Xmx" ]]; then
+	Xmx=1024
+fi
+echo "setting Xmx=$Xmx in jeffmc-server.conf"
+sed -i 's/^#Xmx=.*/Xmx='"$Xmx"'M/' "$MCPATH/$1/jeffmc-server.conf"
 
+
+echo
+echo "======== Basic configuration ========"
+read -p "Max. RAM in MB [1024]: " Xmx
 PORTOK=no
 while [[ "$PORTOK" == "no" ]]; do
 	PORTCONFLICT=no
