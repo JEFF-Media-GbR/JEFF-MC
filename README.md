@@ -103,3 +103,23 @@ Usage: `status` or `status <servername>`
 Screenshot:
 
 ![Screenshot status](https://static.jeff-media.de/i/status.png "Screenshot status")
+
+### stop
+Attempt to stop a server. If the server does not shutdown within $TIMEOUT seconds (can be defined in jeffmc.conf and jeffmc-server.conf, default 120 seconds), the shutdown is assumed as failed.
+
+Usage: `stop <servername>`
+
+### stopall
+Attempts to shutdown all servers. This can take a while, as all servers will be shutdown consecutively.
+
+Usage: `stopall`
+
+Hint: In future versions, there will a be an option to shutdown all servers simultaneously.
+
+### update
+Installs the latest version of JEFF-MC. Please note: If you did custom configurations in your jeffmc.conf file, these may be lost. Please backup your config-file before starting the update. The updater will ask whether or not it should replace your jeffmc.conf file. You should always answer yes, in case there is a new config variable in the new version. You can then add your old configuration options to the new file.
+
+Usage: `update`
+
+## Visit us
+Visit us at https://www.jeff-media.de
