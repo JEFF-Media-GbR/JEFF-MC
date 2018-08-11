@@ -6,13 +6,13 @@ A complete Minecraft server launcher! You can deploy as many server instances as
 JEFF-MC will setup an environment for the user you want to run your minecraft servers as. It will create a number of scripts in that users ~/bin directory, such as ~/bin/start start to start a server, or ~/bin/status status to view its status. When you include ~/bin in your $PATH, you will be able to run the commands without specifying their full name.
 
 ## Installation
+JEFF-MC requires at least the following packages: `git screen dialog make gcc bash` and a Java Runtime Engine. It has been tested on a minimal installation of Debian 9.
+
 Log in as the user you want to run your servers as and run:
 ```
 git clone https://github.com/JEFF-Media-GbR/JEFF-MC
 JEFF-MC/install
 ```
-JEFF-MC requires at least the following packages: `git screen dialog make gcc bash` and a Java Runtime Engine. It has been tested on a minimal installation of Debian 9.
-
 ## Basic usage
 Let's create our first Minecraft server using Spigot:
 ```
