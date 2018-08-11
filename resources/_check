@@ -24,7 +24,6 @@ function echodeb() {
 		CURRENTDEBUGLEVEL="$1"
 		shift
 		echo "[DEBUG ${CURRENTDEBUGLEVEL}] $@"
-		tput bel
 	fi
 }
 
