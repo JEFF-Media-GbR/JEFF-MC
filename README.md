@@ -1,9 +1,12 @@
 # JEFF-MC
-JEFF-MC Spigot Launcher
+Minecraft/Spigot Server Launcher using Bash
 
 A complete minecraft server launcher! You can deploy as many server instances as you wish, attach to their screens, execute commands, edit their configurations, and much more!
 
 JEFF-MC will setup an environment for the user you want to run your minecraft servers as. It will create a number of scripts in that users ~/bin directory, such as ~/bin/start start to start a server, or ~/bin/status status to view its status. When you include ~/bin in your $PATH, you will be able to run the commands without specifying their full name.
+
+## Prerequisites
+JEFF-MC has been tested on Debian 9. You will need to install the following packages:
 
 ## Installation
 Log in as the user you want to run your servers as and run:
