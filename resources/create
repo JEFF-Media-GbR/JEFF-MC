@@ -54,7 +54,8 @@ if [[ "$answer" =~ [oO] ]]; then
 	echo "Please put your jar-file in the server's directory at $MCPATH/$1/"
 	read -n 1 -s -r -p "Press any key to continue when you are finished..."
 	while [[ "$(ls -1 "$MCPATH/$1" | grep .jar$ | wc -l)" -eq 0 ]]; do
-		echoerr "could not your jar-file at $MCPATH/$1"
+		echo
+		echoerr "could not find your jar-file at $MCPATH/$1"
 		echo "Please put your jar-file in the server's directory at $MCPATH/$1/"
 		read -n 1 -s -r -p "Press any key to continue when you are finished..."
 	done
