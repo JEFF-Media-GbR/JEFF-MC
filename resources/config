@@ -32,7 +32,7 @@ flensmall=6
 ilensmall=5
 
 function getflen() {
-    if [[ "$value" == "false" ]] || [[ "$value" == "true" ]]; then
+    if [[ "$value" == "false" ]] || [[ "$value" == "true" ]] || [[ "$key" == "server-port" ]] || [[ "$key" == "difficulty" ]]  || [[ "$key" == "gamemode" ]] || [[ "$key" == "mxa-players" ]] || [[ "$key" == "view-distance" ]]; then
         echo $flensmall
     else
         echo $flen
@@ -40,7 +40,7 @@ function getflen() {
 }
 
 function getilen() {
-    if [[ "$value" == "false" ]] || [[ "$value" == "true" ]]; then
+    if [[ "$value" == "false" ]] || [[ "$value" == "true" ]] || [[ "$key" == "server-port" ]] || [[ "$key" == "difficulty" ]] || [[ "$key" == "gamemode" ]] || [[ "$key" == "max-players" ]] || [[ "$key" == "view-distance" ]]; then
         echo $ilensmall
     else
         echo $ilen
