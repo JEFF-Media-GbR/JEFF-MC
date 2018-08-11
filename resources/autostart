@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ "$RUN_BY_CRON"  == "TRUE" ]]; then
+	sleep 30
+fi
+
 source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
 
 if [[ ! -f "$HOME/autostart.list" ]]; then
