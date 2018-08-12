@@ -59,7 +59,7 @@ chmod u+x "$HOME"/bin/*
 
 echo "Copying config files to $HOME"
 mkdir -p "$HOME/resources"
-cp jeffmc-server.conf.example "$HOME/resources/"
+cp jeffmc-server.conf.example valid-spigot-versions.txt "$HOME/resources/"
 cp -i autostart.list jeffmc.conf "$HOME/"
 
 echo "Applying config"
