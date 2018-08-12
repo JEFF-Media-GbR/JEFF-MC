@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+servername="$1"
+lastlines="$2"
+logfile=logs/latest.log
+
+if [[ -z "$servername" ]]; then
+	echoerr "too few arguments. Usage: log <servername> [lines]"
+	exit 1
+else
+	if [[ ! -d "$MCPATH/$1" ]]; then
+		echoerr "server $servername not found at $MCPATH/$1"
+		exit 1
+  fi
+  if [[ -z "$2" ]]; then
+    cat "$logfile"
+  else
+    tail -n $2 "$logfile"
+  fi
+fi
