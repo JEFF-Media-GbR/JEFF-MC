@@ -4,7 +4,7 @@ source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readab
 
 servername="$1"
 lastlines="$2"
-logfile=logs/latest.log
+logfile="$MCPATH/$servername/logs/latest.log"
 
 if [[ -z "$servername" ]]; then
 	echoerr "too few arguments. Usage: log <servername> [lines]"
