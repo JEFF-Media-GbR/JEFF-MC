@@ -37,6 +37,16 @@ function compilespigot() {
 	fi
 }
 
+function doesversionexist() {
+	if [[ "$(grep ^$VERSION$ | wc -l)" -ne 1 ]]; then
+		#echoerr "version $VERSION is unknown. Please use one of the following values:"
+		#cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
+		return 1
+	else
+		return 0
+	fi
+}
+
 echo "=== Creating server $servername ==="
 mkdir $servername
 echo "To create the server, we need a minecraft server binary. You have two options:"
@@ -80,6 +90,11 @@ if [[ "$answer" -eq 1 ]]; then
 	fi	
 elif [[ "$answer" -eq 2 ]]; then
 read -p "Spigot version [e.g. 1.12.2]: " VERSION
+
+while [[ $(doesversionexist) -eq 1 ]]; do
+	echo "Die Version gibts nicht!"
+	read -p "Spigot version [e.g. 1.12.2]: " VERSION
+done
 
 # Testen ob Version bereits kompiliert wurde
 if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
