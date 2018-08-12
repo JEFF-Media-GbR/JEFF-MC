@@ -38,8 +38,7 @@ function compilespigot() {
 }
 
 function doesversionexist() {
-	echodeb 5 1
-	if [[ "$(grep ^$1$ | wc -l)" -ne 1 ]]; then
+	if [[ "$(grep ^$1$ $HOME/resources/valid-spigot-versions.txt| wc -l)" -ne 1 ]]; then
 		echo no
 	else
 		echo yes
@@ -89,13 +88,11 @@ if [[ "$answer" -eq 1 ]]; then
 	fi	
 elif [[ "$answer" -eq 2 ]]; then
 read -p "Spigot version [e.g. 1.12.2]: " VERSION
-echodeb 5 10
-echo $doesversionexist $VERSION
-doesversionexist $VERSION
 while [[ "$(doesversionexist $VERSION)" == "no" ]]; do
-	echodeb 6 11
-	echoerr "version $VERSION does not exist."
-	
+echo
+	echoerr "version $VERSION does not exist. Use one of the following values:"
+	cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
+	echo
 	read -p "Spigot version [e.g. 1.12.2]: " VERSION
 done
 
