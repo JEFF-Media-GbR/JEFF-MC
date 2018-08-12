@@ -22,25 +22,24 @@ cd "${0%/*}"
 
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
+JEFFMCVERSION="JEFF-MC Build $(LANG=C git log -n 1 --pretty=format:%cd .)"
 
 command -v java >/dev/null 2>&1 || { echo -e >&2 "JEFF-MC requires java to run the server executables."; exit 1; }
 
-echo "${BOLD}=======      JEFF-MC Spigot Launcher      =======${RESET}"
+echo "${BOLD}=======      JEFF-MC Minecraft Launcher      =======${RESET}"
+echo "                  $JEFFMCVERSION"
 echo
-echo "This script will install JEFF-MC to the homedir of"
-echo "the current user ($USER)."
+echo "This script will install JEFF-MC to the homedir of the current user ($USER)."
 echo
-echo "If you want to run the server executables as another"
-echo "user, you have to cancel the installation and run the"
-echo "installer as the desired user."
-echo "You should use a fresh account for installation, as the"
-echo "installer might overwrite already existing files."
+echo "If you want to run the server executables as another user, you have to cancel"
+echo "the installation and run the installer as the desired user. You should use a"
+echo "fresh account for installation, as the installer might overwrite already"
+echo "existing files."
 echo
 echo "${BOLD}Installation Path:${RESET} $HOME"
 echo
-echo "Your Minecraft files can be stored in a different"
-echo "directory. You can specify the desired path at a later"
-echo "time in the file $HOME/jeffmc.conf"
+echo "Your Minecraft files can be stored in a different directory. You can specify
+echo "the desired path at a later time in the file $HOME/jeffmc.conf"
 echo
 if [[ "$FORCE" != "yes" ]]; then
 	read -p "Continue installation to $HOME? [y/n]: " answer
@@ -83,6 +82,8 @@ if [[ "$(crontab -l | grep "@reboot RUN_BY_CRON=TRUE ${HOME}/bin/autostart" | wc
 else
 	echo "cron was already installed."
 fi
+
+echo "$JEFFMCVERSION" > "$HOME/resources/_jeffmc_version.txt"
 
 echo
 echo "${BOLD}=== Success ===${RESET}"
