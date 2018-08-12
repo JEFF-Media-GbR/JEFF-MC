@@ -61,6 +61,7 @@ Usage: `config <servername>`
 Screenshot:
 
 ![Screenshot config](https://static.jeff-media.de/i/config.png "Screenshot config")
+![Screenshot config](https://static.jeff-media.de/i/config2.png "Screenshot config2")
 
 ### create
 Creates a new server. You can automatically install a custom Spigot version, or use your own jar-file. You will be asked a few basic configuration questions, such es port and maxplayers.
