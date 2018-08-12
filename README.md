@@ -70,6 +70,11 @@ Usage: `create <servername>`
 
 Hint: In further versions, create will understand command line arguments to make it useable in scripts. Right now, to batch create servers, you have to create it once and then clone the server as often as you like.
 
+### log
+View a server's logfile. You can optionally specify the maximum number of lines to be output.
+
+Usage: `log <servername> [lines]`
+
 ### restart
 Restart a running server.
 
