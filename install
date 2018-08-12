@@ -38,7 +38,7 @@ echo "existing files."
 echo
 echo "${BOLD}Installation Path:${RESET} $HOME"
 echo
-echo "Your Minecraft files can be stored in a different directory. You can specify
+echo "Your Minecraft files can be stored in a different directory. You can specify"
 echo "the desired path at a later time in the file $HOME/jeffmc.conf"
 echo
 if [[ "$FORCE" != "yes" ]]; then
