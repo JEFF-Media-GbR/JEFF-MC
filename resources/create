@@ -72,7 +72,9 @@ if [[ "$answer" -eq 1 ]]; then
 			fi
 			echo
 			echo "Warning: We found more than one jar-file at $MCPATH/$1:"
-			ls -1 "$MCPATH/$1" | grep .jar$
+			echo
+			ls -1 "$MCPATH/$1" | grep .jar$ | { for s in $(cat -); do echo "> $s"; done }
+			echo
 			read -p "Please enter the name of the jar-file you want to use: " jarname
 		done
 	fi	
