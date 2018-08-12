@@ -6,6 +6,8 @@ source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readab
 
 needscommand dialog
 
+set -e
+
 if [[ "$#" -lt 1 ]]; then
     echoerr "too few parameters. Usage: $0 <servername>"
     exit 1
@@ -31,6 +33,7 @@ if [[ "$flen" -lt 10 ]]; then flen=10; fi
 ilen=200
 flensmall=6
 ilensmall=5
+dialogargs="--backtitle \"JEFF-MC Spigot Launcher\" --title \"JEFF-MC: Server configuration\" --form \"\\nServer: $servername\\nFile: server.properties\" $lines $cols $menuheight "
 
 function getlen() {
     if [[ "$key" == "op-permission-level" ]] \
@@ -105,7 +108,7 @@ touch $tmpanswerfile || {
     exit 1
 }
 
-echo -n "dialog --title \"JEFF-MC: Server configuration\" --form \"\\nServer: $servername\\nFile: server.properties\" $lines $cols $menuheight " > $tmprunfile 
+echo -n "dialog $dialogargs " > $tmprunfile 
 echo -n $array >> $tmprunfile
 echo -n " 2> $tmpanswerfile" >> $tmprunfile
 
