@@ -38,17 +38,17 @@ function compilespigot() {
 }
 
 function doesversionexist() {
-	debug 5 1
+	echodeb 5 1
 	if [[ "$(grep ^$VERSION\$ | wc -l)" -ne 1 ]]; then
 		#echoerr "version $VERSION is unknown. Please use one of the following values:"
 		#cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
 		echo no
-		debug 5 2
+		echodeb 5 2
 	else
 		echo yes
-		debug 5 3
+		echodeb 5 3
 	fi
-	debug 5 4
+	echodeb 5 4
 }
 
 echo "=== Creating server $servername ==="
