@@ -26,7 +26,7 @@ servername="$1"
 }
 
 
-
+{
 function compilespigot() {
 	cd "$HOME/BuildTools" || { echoerr "directory $HOME/BuildTools not found"; exit 1; }
 	wget -O BuildTools.jar "$BUILDTOOLSLINK"
@@ -239,3 +239,4 @@ echo
 echo "Notes:"
 echo "- When using a firewall, be sure to enable connections on port $PORT."
 echo "- The server has not been started. You can do so with 'start $servername'"
+} | rmserver "$servername"
