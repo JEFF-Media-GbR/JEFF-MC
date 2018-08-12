@@ -27,7 +27,7 @@ JEFFMCVERSION="JEFF-MC Build $(LANG=C git log -n 1 --pretty=format:%cd .)"
 command -v java >/dev/null 2>&1 || { echo -e >&2 "JEFF-MC requires java to run the server executables."; exit 1; }
 
 echo "${BOLD}=======      JEFF-MC Minecraft Launcher      =======${RESET}"
-echo "                  $JEFFMCVERSION"
+echo "           $JEFFMCVERSION"
 echo
 echo "This script will install JEFF-MC to the homedir of the current user ($USER)."
 echo
