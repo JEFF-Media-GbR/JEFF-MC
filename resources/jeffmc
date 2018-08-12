@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source "$HOME/bin/_check" || { echo "error: $HOME/bin/_check not found or readable"; exit 1; }
+
+cat "$HOME/resources/_jeffmc_version.txt" || { 
