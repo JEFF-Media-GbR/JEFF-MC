@@ -94,8 +94,9 @@ if [[ "$answer" -eq 1 ]]; then
 	fi	
 elif [[ "$answer" -eq 2 ]]; then
 read -p "Spigot version [e.g. 1.12.2]: " VERSION
-
+echodeb 5 10
 while [[ "$(doesversionexist $VERSION)" == "no" ]]; do
+	echodeb 6 11
 	echoerr "version $VERSION does not exist."
 	
 	read -p "Spigot version [e.g. 1.12.2]: " VERSION
