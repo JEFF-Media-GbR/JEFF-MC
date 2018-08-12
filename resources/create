@@ -25,6 +25,8 @@ servername="$1"
 	exit 1
 }
 
+trap "$HOME"'/bin/rmserver '"$servername" ERR
+
 function compilespigot() {
 	cd "$HOME/BuildTools" || { echoerr "directory $HOME/BuildTools not found"; exit 1; }
 	wget -O BuildTools.jar "$BUILDTOOLSLINK"
