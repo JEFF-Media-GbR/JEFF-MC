@@ -41,9 +41,9 @@ function doesversionexist() {
 	if [[ "$(grep ^$VERSION\$ | wc -l)" -ne 1 ]]; then
 		#echoerr "version $VERSION is unknown. Please use one of the following values:"
 		#cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
-		return no
+		echo no
 	else
-		return yes
+		echo yes
 	fi
 }
 
