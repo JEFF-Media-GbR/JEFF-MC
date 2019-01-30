@@ -17,6 +17,7 @@ fi
 Xms=256M
 Xmx=1024M
 executable=$(find "$MCPATH/$1/." -maxdepth 1 -name \*.jar | sort | tail -n1 2>/dev/null)
+xtraargs="--nojline"
 
 [[ "$#" -lt 1 ]] && {
 	echoerr "no servername given. Usage: start [-a] <servername>"
@@ -48,7 +49,7 @@ fi
 echodeb 1 "starting server $1 in screen-session mc-$1 with following command:"
 echodeb 1 "java -Xmx${Xmx} -Xms${Xms} -jar $executable"
 
-screen -dmS "mc-$1" java -Xmx${Xmx} -Xms${Xms} -jar "$executable"
+screen -dmS "mc-$1" java -Xmx${Xmx} -Xms${Xms} -jar "$executable" $xtraargs
 
 echo "server $1 is starting now"
 
