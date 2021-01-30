@@ -39,11 +39,6 @@ function compilespigot() {
 
 function doesversionexist() {
 	echo yes
-	#if [[ "$(grep ^$1$ $HOME/resources/valid-spigot-versions.txt| wc -l)" -ne 1 ]]; then
-	#	echo no
-	#else
-	#	echo yes
-	#fi
 }
 
 echo "=== Creating server $servername ==="
@@ -67,7 +62,7 @@ if [[ "$answer" -eq 3 ]]; then
 		echo "Error: Could not download Paper version $VERSION"
 		exit 1
 		}
-	mv /tmp/jeffmc.server.jar $MCPATH/$1/
+	mv /tmp/jeffmc-server.jar $MCPATH/$1/
 fi
 
 if [[ "$answer" -eq 4 ]]; then
@@ -76,7 +71,7 @@ if [[ "$answer" -eq 4 ]]; then
 		echo "Error: Could not download .jar file"
 		exit 1
 		}
-	mv /tmp/jeffmc.server.jar $MCPATH/$1/
+	mv /tmp/jeffmc-server.jar $MCPATH/$1/
 fi
 
 
