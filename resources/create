@@ -73,7 +73,7 @@ fi
 if [[ "$answer" -eq 4 ]]; then
 	read -p "Download link: " LINK
 	wget -O wget -O /tmp/jeffmc-server.jar "$LINK" || {
-		echo "Error: Could not download .jar file
+		echo "Error: Could not download .jar file"
 		exit 1
 		}
 	mv /tmp/jeffmc.server.jar $MCPATH/$1/
