@@ -105,37 +105,39 @@ if [[ "$answer" -eq 1 ]]; then
 			read -p "Please enter the name of the jar-file you want to use: " jarname
 		done
 	fi	
-elif [[ "$answer" -eq 2 ]]; then
-read -p "Spigot version [e.g. 1.12.2]: " VERSION
-while [[ "$(doesversionexist $VERSION)" == "no" ]]; do
-echo
-	echoerr "version $VERSION does not exist. Use one of the following values:"
-	cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
-	echo
-	read -p "Spigot version [e.g. 1.12.2]: " VERSION
-done
-
-# Testen ob Version bereits kompiliert wurde
-if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
-then
-	echo "Spigot version $VERSION has not been compiled yet, starting BuildTools..."
-	compilespigot
-else
-	echo "Spigot version $VERSION has already been compiled, but we don't know if there is a new version."
-	read -p "Recompile Spigot version $VERSION? If you choose no, we will use the existing version. [y/n]: " yesno
-	if [[ "$yesno" =~ ^[Yy]$ ]]; then
-		echo "Recompiling Spigot version $VERSION, starting BuildTools..."
-		compilespigot
-	else
-		echo "Using existing Spigot version $VERSION"
-	fi
 fi
 
-cp "$HOME/BuildTools/spigot-$VERSION.jar" "$servername"/
-echo "Spigot version $VERSION has been installed to $MCPATH/$servername/spigot-$VERSION.jar"
+if [[ "$answer" -eq 2 ]]; then
+	read -p "Spigot version [e.g. 1.12.2]: " VERSION
+	while [[ "$(doesversionexist $VERSION)" == "no" ]]; do
+	echo
+		echoerr "version $VERSION does not exist. Use one of the following values:"
+		cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
+		echo
+		read -p "Spigot version [e.g. 1.12.2]: " VERSION
+	done
 
-else
-	echoerr "could not understand: $answer"
+	# Testen ob Version bereits kompiliert wurde
+	if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
+	then
+		echo "Spigot version $VERSION has not been compiled yet, starting BuildTools..."
+		compilespigot
+	else
+		echo "Spigot version $VERSION has already been compiled, but we don't know if there is a new version."
+		read -p "Recompile Spigot version $VERSION? If you choose no, we will use the existing version. [y/n]: " yesno
+		if [[ "$yesno" =~ ^[Yy]$ ]]; then
+			echo "Recompiling Spigot version $VERSION, starting BuildTools..."
+			compilespigot
+		else
+			echo "Using existing Spigot version $VERSION"
+		fi
+	fi
+
+	cp "$HOME/BuildTools/spigot-$VERSION.jar" "$servername"/
+	echo "Spigot version $VERSION has been installed to $MCPATH/$servername/spigot-$VERSION.jar"
+
+	else
+		echoerr "could not understand: $answer"
 fi
 echo
 echo -n "Starting server to generate eula.txt..."
