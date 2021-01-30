@@ -130,7 +130,7 @@ if [[ "$answer" -eq 2 ]]; then
 	cp "$HOME/BuildTools/spigot-$VERSION.jar" "$servername"/
 	echo "Spigot version $VERSION has been installed to $MCPATH/$servername/spigot-$VERSION.jar"
 
-else
+fi
 
 echo
 echo -n "Starting server to generate eula.txt..."
