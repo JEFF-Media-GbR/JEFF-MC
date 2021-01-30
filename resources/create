@@ -51,12 +51,35 @@ mkdir $servername
 echo "To create the server, we need a minecraft server binary. You have two options:"
 echo
 echo " [1.] You can put your own jar-file at $MCPATH/$1"
-echo " [2.] We can automatically compile and install Spigot (www.spigotmc.org)."
+echo " [2.] Automatically compile and install a specific version of Spigot (www.spigotmc.org)."
+echo " [3.] Automatically download a specific version of Paper (www.papermc.io)"
+echo " [4.] You can provide a direct download link to a .jar file to use."
 echo
+
 answer=""
-while [[ ! "$answer" -eq 1 ]] && [[ ! "$answer" -eq 2 ]]; do
+while [[ ! "$answer" -eq 1 ]] && [[ ! "$answer" -eq 2 ]] && [[ ! "$answer" -eq 3 ]] && [[ ! "$answer" -eq 4 ]]; do
 	read -p "Please choose: " answer
 done
+
+if [[ "$answer" -eq 3 ]]; then
+	read -p "Paper version [e.g. 1.12.2]: " VERSION
+	wget -O /tmp/jeffmc-server.jar https://papermc.io/api/v1/paper/${VERSION}/latest/download || {
+		echo "Error: Could not download Paper version $VERSION"
+		exit 1
+		}
+	mv /tmp/jeffmc.server.jar $MCPATH/$1/
+fi
+
+if [[ "$answer" -eq 4 ]]; then
+	read -p "Download link: " LINK
+	wget -O wget -O /tmp/jeffmc-server.jar "$LINK" || {
+		echo "Error: Could not download .jar file
+		exit 1
+		}
+	mv /tmp/jeffmc.server.jar $MCPATH/$1/
+fi
+
+
 if [[ "$answer" -eq 1 ]]; then
 	echo
 	echo "Please put your jar-file in the server's directory at $MCPATH/$1/"
