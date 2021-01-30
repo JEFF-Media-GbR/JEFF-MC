@@ -108,14 +108,8 @@ if [[ "$answer" -eq 1 ]]; then
 fi
 
 if [[ "$answer" -eq 2 ]]; then
+	echo "debug 1"
 	read -p "Spigot version [e.g. 1.12.2]: " VERSION
-	while [[ "$(doesversionexist $VERSION)" == "no" ]]; do
-	echo
-		echoerr "version $VERSION does not exist. Use one of the following values:"
-		cat "$HOME/resources/valid-spigot-versions.txt" | { for s in $(cat -); do echo "> $s"; done }
-		echo
-		read -p "Spigot version [e.g. 1.12.2]: " VERSION
-	done
 
 	# Testen ob Version bereits kompiliert wurde
 	if [[ ! -f "$HOME/BuildTools/spigot-$VERSION.jar" ]]
